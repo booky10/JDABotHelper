@@ -65,7 +65,7 @@ import net.dv8tion.jda.api.events.user.UserTypingEvent;
 import net.dv8tion.jda.api.events.user.update.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-import tk.booky.jdahelper.api.event.events.Event;
+import tk.booky.jdahelper.api.event.api.Event;
 import tk.booky.jdahelper.api.event.events.entity.EntityUpdateEvent;
 
 public final class Listener extends ListenerAdapter {
@@ -385,7 +385,7 @@ public final class Listener extends ListenerAdapter {
         super.onTextChannelCreate(event);
     }
 
-    @Override
+    @Override // TODO
     public void onVoiceChannelDelete(@NotNull VoiceChannelDeleteEvent event) {
         super.onVoiceChannelDelete(event);
     }

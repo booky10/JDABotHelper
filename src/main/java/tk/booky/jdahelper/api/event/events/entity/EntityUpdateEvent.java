@@ -2,7 +2,7 @@ package tk.booky.jdahelper.api.event.events.entity;
 // Created by booky10 in JDABotHelper (21:36 27.09.20)
 
 import net.dv8tion.jda.api.JDA;
-import tk.booky.jdahelper.api.event.events.Event;
+import tk.booky.jdahelper.api.event.api.Event;
 
 public class EntityUpdateEvent<E, T> extends Event {
 
