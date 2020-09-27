@@ -3,7 +3,18 @@ package tk.booky.jdahelper.api.exceptions;
 
 public class JDANotStartedException extends IllegalStateException {
 
-    public JDANotStartedException(String text) {
-        super(text);
+    public JDANotStartedException() {
+    }
+
+    public JDANotStartedException(String s) {
+        super(s);
+    }
+
+    public JDANotStartedException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public JDANotStartedException(Throwable cause) {
+        super(cause);
     }
 }
