@@ -385,7 +385,7 @@ public final class Listener extends ListenerAdapter {
         super.onTextChannelCreate(event);
     }
 
-    @Override // TODO
+    @Override
     public void onVoiceChannelDelete(@NotNull VoiceChannelDeleteEvent event) {
         super.onVoiceChannelDelete(event);
     }
