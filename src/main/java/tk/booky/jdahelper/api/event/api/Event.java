@@ -14,6 +14,10 @@ public class Event {
         this.response = response;
     }
 
+    public Event(JDA jda) {
+        this(jda, jda.getResponseTotal());
+    }
+
     public final JDA getJDA() {
         return jda;
     }
