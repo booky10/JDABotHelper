@@ -8,63 +8,74 @@ import tk.booky.jdahelper.api.event.api.IListener;
 import tk.booky.jdahelper.utils.Pair;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 public final class EventManager extends AbstractEventManager {
 
-    private final List<IListener> registeredListeners = new ArrayList<>();
+    private final HashMap<Method, Class<? extends Event>> registeredHandlers = new HashMap<>();
+    private final HashMap<Method, IListener> listenerInstances = new HashMap<>();
 
     @Override
     public final void callEvent(Event event) {
-        List<EventData> data = new ArrayList<>();
+        List<Method> dataList = new ArrayList<>();
 
-        for (IListener listener : registeredListeners) {
-            List<Pair<Method, HandleEvent>> handlers = new ArrayList<>();
-            for (Method method : listener.getClass().getDeclaredMethods()) {
+        for (Method method : registeredHandlers.keySet())
+            if (registeredHandlers.get(method).isAssignableFrom(event.getClass()))
+                dataList.add(method);
+
+        sortDataList(dataList);
+
+        for (Method method : dataList) {
+            try {
                 method.setAccessible(true);
-                for (Annotation annotation : method.getDeclaredAnnotations())
-                    if (annotation.annotationType().equals(HandleEvent.class))
-                        handlers.add(new Pair<>(method, (HandleEvent) annotation));
+                method.invoke(listenerInstances.get(method), event);
+            } catch (IllegalAccessException | InvocationTargetException exception) {
+                exception.printStackTrace();
             }
-            data.add(new EventData(listener, handlers));
         }
-
-        sortDataList(data);
-
-        for (EventData eventData : data)
-            for (Pair<Method, HandleEvent> pair : eventData.getHandlers())
-                try {
-                    pair.getKey().invoke(eventData, event);
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
-                }
     }
 
-    private void sortDataList(List<EventData> data) {
-        Comparator<Pair<Method, HandleEvent>> comparator = new PriorityComparator();
-        List<EventData> dataCopy = new ArrayList<>(data);
-        data.clear();
-
-        for (EventData eventDataCopy : dataCopy) {
-            eventDataCopy.getHandlers().sort(comparator);
-            data.add(eventDataCopy);
-        }
+    private void sortDataList(List<Method> data) {
+        Comparator<Method> comparator = new PriorityComparator();
+        data.sort(comparator);
     }
 
     @Override
     public final void registerListener(IListener listener) {
-        if (registeredListeners.contains(listener)) return;
-        registeredListeners.add(listener);
+        for (Method method : listener.getClass().getDeclaredMethods()) {
+            method.setAccessible(true);
+            boolean has = false;
+
+            for (Annotation annotation : method.getDeclaredAnnotations())
+                if (annotation.annotationType().equals(HandleEvent.class)) has = true;
+            if (!has) continue;
+
+            try {
+                registeredHandlers.put(method, (Class<? extends Event>) method.getParameterTypes()[0]);
+                listenerInstances.put(method, listener);
+            } catch (Throwable ignored) {
+            }
+        }
     }
 
     public final void unregisterListener(IListener listener) {
-        registeredListeners.remove(listener);
+        unregisterListener(listener.getClass());
     }
 
     public final void unregisterListener(Class<? extends IListener> clazz) {
-        registeredListeners.removeIf(listener -> listener.getClass().equals(clazz));
+        List<Method> methods = new ArrayList<>();
+        for (Method method : clazz.getDeclaredMethods()) {
+            method.setAccessible(true);
+            methods.add(method);
+        }
+
+        for (Method method : new ArrayList<>(registeredHandlers.keySet())) {
+            if (methods.contains(method)) registeredHandlers.remove(method);
+        }
     }
 }
