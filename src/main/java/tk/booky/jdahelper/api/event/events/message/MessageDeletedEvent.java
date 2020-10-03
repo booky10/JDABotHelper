@@ -1,7 +1,12 @@
 package tk.booky.jdahelper.api.event.events.message;
 // Created by booky10 in JDABotHelper (21:53 27.09.20)
 
-public class MessageDeletedEvent {
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.MessageChannel;
 
+public class MessageDeletedEvent extends MessageEvent{
 
+    public MessageDeletedEvent(JDA api, Long responseNumber, Long messageId, MessageChannel channel) {
+        super(api, responseNumber, messageId, channel);
+    }
 }
