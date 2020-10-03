@@ -17,6 +17,7 @@ public final class EventManager extends AbstractEventManager {
 
     private final List<IListener> registeredListeners = new ArrayList<>();
 
+    @Override
     public final void callEvent(Event event) {
         List<EventData> data = new ArrayList<>();
 
@@ -53,6 +54,7 @@ public final class EventManager extends AbstractEventManager {
         }
     }
 
+    @Override
     public final void registerListener(IListener listener) {
         if (registeredListeners.contains(listener)) return;
         registeredListeners.add(listener);

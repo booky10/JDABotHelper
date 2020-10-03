@@ -6,7 +6,9 @@ import tk.booky.jdahelper.internal.events.EventData;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class AbstractEventManager extends HashMap<Class<? extends Event>, List<EventData>> {
+public abstract class AbstractEventManager {
 
     public abstract void callEvent(Event event);
+
+    public abstract void registerListener(IListener listener);
 }
