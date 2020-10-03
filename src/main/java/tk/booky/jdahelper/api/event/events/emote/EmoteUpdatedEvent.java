@@ -7,8 +7,7 @@ import tk.booky.jdahelper.api.event.api.IUpdateEvent;
 
 public class EmoteUpdatedEvent<T> extends EmoteEvent implements IUpdateEvent<Emote, T> {
 
-    protected final T previous;
-    protected final T next;
+    protected final T previous, next;
     protected final String identifier;
 
     public EmoteUpdatedEvent(JDA jda, Long response, Emote emote, T previous, T next, String identifier) {

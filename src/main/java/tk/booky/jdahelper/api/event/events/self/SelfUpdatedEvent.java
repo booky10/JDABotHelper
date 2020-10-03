@@ -8,8 +8,7 @@ import tk.booky.jdahelper.api.event.api.IUpdateEvent;
 
 public class SelfUpdatedEvent<T> extends Event implements IUpdateEvent<SelfUser, T> {
 
-    protected final T previous;
-    protected final T next;
+    protected final T previous, next;
     protected final String identifier;
 
     public SelfUpdatedEvent(JDA jda, Long response, T previous, T next, String identifier) {
