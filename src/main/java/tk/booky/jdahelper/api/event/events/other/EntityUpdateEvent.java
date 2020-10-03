@@ -1,4 +1,4 @@
-package tk.booky.jdahelper.api.event.events.entity;
+package tk.booky.jdahelper.api.event.events.other;
 // Created by booky10 in JDABotHelper (21:36 27.09.20)
 
 import net.dv8tion.jda.api.JDA;

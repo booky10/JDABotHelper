@@ -22,7 +22,7 @@ public class Event {
         return jda;
     }
 
-    public Long getResponse() {
+    public Long getResponseTime() {
         return response;
     }
 

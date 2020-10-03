@@ -66,7 +66,7 @@ import net.dv8tion.jda.api.events.user.update.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import tk.booky.jdahelper.api.event.api.Event;
-import tk.booky.jdahelper.api.event.events.entity.EntityUpdateEvent;
+import tk.booky.jdahelper.api.event.events.other.EntityUpdateEvent;
 
 public final class Listener extends ListenerAdapter {
 
