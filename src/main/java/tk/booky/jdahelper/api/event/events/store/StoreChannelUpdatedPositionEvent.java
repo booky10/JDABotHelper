@@ -12,20 +12,10 @@ public class StoreChannelUpdatedPositionEvent extends StoreChannelUpdatedEvent<I
         super(jda, response, channel, prev, next, identifier);
     }
 
-    /**
-     * The old position
-     *
-     * @return The old position
-     */
     public Integer getOldPosition() {
         return getOldValue();
     }
 
-    /**
-     * The new position
-     *
-     * @return The new position
-     */
     public Integer getNewPosition() {
         return getNewValue();
     }
