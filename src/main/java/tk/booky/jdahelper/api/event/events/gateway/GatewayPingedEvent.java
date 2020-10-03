@@ -3,9 +3,9 @@ package tk.booky.jdahelper.api.event.events.gateway;
 
 import net.dv8tion.jda.api.JDA;
 import tk.booky.jdahelper.api.event.api.Event;
-import tk.booky.jdahelper.api.event.api.UpdateEvent;
+import tk.booky.jdahelper.api.event.api.IUpdateEvent;
 
-public class GatewayPingedEvent extends Event implements UpdateEvent<JDA, Long> {
+public class GatewayPingedEvent extends Event implements IUpdateEvent<JDA, Long> {
 
     public static final String IDENTIFIER = "gateway-ping";
     private final long next, prev;

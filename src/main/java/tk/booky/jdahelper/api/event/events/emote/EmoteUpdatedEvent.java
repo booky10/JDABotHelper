@@ -3,9 +3,9 @@ package tk.booky.jdahelper.api.event.events.emote;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Emote;
-import tk.booky.jdahelper.api.event.api.UpdateEvent;
+import tk.booky.jdahelper.api.event.api.IUpdateEvent;
 
-public class EmoteUpdatedEvent<T> extends EmoteEvent implements UpdateEvent<Emote, T> {
+public class EmoteUpdatedEvent<T> extends EmoteEvent implements IUpdateEvent<Emote, T> {
 
     protected final T previous;
     protected final T next;
