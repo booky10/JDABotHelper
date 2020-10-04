@@ -3,9 +3,7 @@ package tk.booky.jdahelper.api.event.events.direct;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.MessageReaction;
-import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.User;
-import tk.booky.jdahelper.api.event.api.Event;
 
 public class DirectReactionEvent extends DirectMessageEvent {
 
@@ -18,18 +16,11 @@ public class DirectReactionEvent extends DirectMessageEvent {
         this.reaction = reaction;
     }
 
-    public String getUserID() {
-        return Long.toUnsignedString(userID);
-    }
-
-    public Long getUserIDLong() {
-        return userID;
-    }
-
     public MessageReaction getReaction() {
         return reaction;
     }
 
+    @Override
     public User getUser() {
         return userID == getJDA().getSelfUser().getIdLong() ? getJDA().getSelfUser() : getChannel().getUser();
     }

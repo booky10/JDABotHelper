@@ -3,18 +3,15 @@ package tk.booky.jdahelper.api.event.events.direct;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.PrivateChannel;
-import net.dv8tion.jda.api.entities.User;
-import tk.booky.jdahelper.api.event.api.Event;
 
-public class DirectMessageEvent extends Event {
+public class DirectMessageEvent extends DirectEvent {
 
     protected final Long messageID;
-    protected final PrivateChannel channel;
 
     public DirectMessageEvent(JDA jda, Long response, Long messageID, PrivateChannel channel) {
-        super(jda, response);
+        super(jda, response, channel);
+
         this.messageID = messageID;
-        this.channel = channel;
     }
 
     public Long getMessageIDLong() {
@@ -22,14 +19,6 @@ public class DirectMessageEvent extends Event {
     }
 
     public String getMessageID() {
-        return Long.toUnsignedString(messageID);
-    }
-
-    public PrivateChannel getChannel() {
-        return channel;
-    }
-
-    public User getUser() {
-        return channel.getUser();
+        return Long.toUnsignedString(getMessageIDLong());
     }
 }

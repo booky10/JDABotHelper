@@ -14,6 +14,7 @@ public class ConnectionShutdownEvent extends Event {
 
     public ConnectionShutdownEvent(JDA jda, OffsetDateTime shutdownTime, Integer code) {
         super(jda);
+
         this.shutdownTime = shutdownTime;
         this.code = code;
     }

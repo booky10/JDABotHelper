@@ -8,7 +8,7 @@ import tk.booky.jdahelper.api.event.api.Event;
 
 public class CategoryEvent extends Event {
 
-    private final Category category;
+    protected final Category category;
 
     public CategoryEvent(JDA jda, Long response, Category category) {
         super(jda, response);

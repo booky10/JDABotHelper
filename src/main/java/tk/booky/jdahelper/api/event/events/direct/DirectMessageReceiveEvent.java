@@ -12,6 +12,7 @@ public class DirectMessageReceiveEvent extends DirectMessageEvent {
 
     public DirectMessageReceiveEvent(JDA jda, Long response, Long messageID, PrivateChannel channel, Message message) {
         super(jda, response, messageID, channel);
+
         this.message = message;
     }
 

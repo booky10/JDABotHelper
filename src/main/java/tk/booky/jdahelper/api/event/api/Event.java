@@ -27,7 +27,7 @@ public class Event {
     }
 
     /**
-     * @return true if successful, if not false.
+     * @return <code>true</code> if successful, if not <code>false</code>.
      */
     public final Boolean call() {
         Helper.getEventManager().callEvent(this);

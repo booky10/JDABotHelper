@@ -13,6 +13,7 @@ public class DirectEmbedReceiveEvent extends DirectMessageEvent {
 
     public DirectEmbedReceiveEvent(JDA jda, Long response, Long messageID, PrivateChannel channel, List<MessageEmbed> embeds) {
         super(jda, response, messageID, channel);
+
         this.embeds = embeds;
     }
 

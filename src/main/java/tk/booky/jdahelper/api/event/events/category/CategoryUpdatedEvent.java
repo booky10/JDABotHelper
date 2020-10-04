@@ -6,8 +6,6 @@ import net.dv8tion.jda.api.entities.Category;
 import org.jetbrains.annotations.NotNull;
 import tk.booky.jdahelper.api.event.api.IUpdateEvent;
 
-import java.util.StringJoiner;
-
 public class CategoryUpdatedEvent<T> extends CategoryEvent implements IUpdateEvent<Category, T> {
 
     protected final T previous, next;
@@ -43,10 +41,6 @@ public class CategoryUpdatedEvent<T> extends CategoryEvent implements IUpdateEve
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
-                .add("previous=" + previous)
-                .add("next=" + next)
-                .add("identifier='" + identifier + "'")
-                .toString();
+        return "CategoryUpdate[" + getPropertyIdentifier() + "](" + getOldValue() + "->" + getNewValue() + ')';
     }
 }

@@ -18,6 +18,7 @@ public class ConnectionDisconnectedEvent extends Event {
                                        WebSocketFrame clientCloseFrame, Boolean closedByServer,
                                        OffsetDateTime disconnectTime) {
         super(jda);
+
         this.serverCloseFrame = serverCloseFrame;
         this.clientCloseFrame = clientCloseFrame;
         this.closedByServer = closedByServer;
