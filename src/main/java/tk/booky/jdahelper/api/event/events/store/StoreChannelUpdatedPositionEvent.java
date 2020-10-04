@@ -8,8 +8,8 @@ public class StoreChannelUpdatedPositionEvent extends StoreChannelUpdatedEvent<I
 
     public static final String IDENTIFIER = "position";
 
-    public StoreChannelUpdatedPositionEvent(JDA jda, Long response, StoreChannel channel, Integer prev, Integer next, String identifier) {
-        super(jda, response, channel, prev, next, identifier);
+    public StoreChannelUpdatedPositionEvent(JDA jda, Long response, StoreChannel channel, Integer oldPosition) {
+        super(jda, response, channel, oldPosition, channel.getPositionRaw(), IDENTIFIER);
     }
 
     public Integer getOldPosition() {

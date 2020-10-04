@@ -11,6 +11,7 @@ public class ErrorEvent extends Event {
 
     public ErrorEvent(JDA jda, Throwable throwable, Boolean logged) {
         super(jda);
+
         this.throwable = throwable;
         this.logged = logged;
     }

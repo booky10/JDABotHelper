@@ -3,8 +3,6 @@ package tk.booky.jdahelper.api.event.events.self;
 
 import net.dv8tion.jda.api.JDA;
 
-import javax.annotation.Nonnull;
-
 public class SelfUpdatedNameEvent extends SelfUpdatedEvent<String> {
 
     public static final String IDENTIFIER = "name";
@@ -19,15 +17,5 @@ public class SelfUpdatedNameEvent extends SelfUpdatedEvent<String> {
 
     public String getNewName() {
         return getNewValue();
-    }
-
-    @Override
-    public String getOldValue() {
-        return super.getOldValue();
-    }
-
-    @Override
-    public String getNewValue() {
-        return super.getNewValue();
     }
 }

@@ -12,17 +12,11 @@ public class RoleUpdatedHoistedEvent extends RoleUpdatedEvent<Boolean> {
         super(jda, response, role, wasHoisted, !wasHoisted, IDENTIFIER);
     }
 
-    public boolean wasHoisted() {
+    public Boolean wasHoisted() {
         return getOldValue();
     }
 
-    @Override
-    public Boolean getOldValue() {
-        return super.getOldValue();
-    }
-
-    @Override
-    public Boolean getNewValue() {
-        return super.getNewValue();
+    public Boolean isHoisted(){
+        return getNewValue();
     }
 }

@@ -9,8 +9,8 @@ public class TextChannelUpdatedParentEvent extends TextChannelUpdatedEvent<Categ
 
     public static final String IDENTIFIER = "parent";
 
-    public TextChannelUpdatedParentEvent(JDA jda, Long response, TextChannel channel, Category previous) {
-        super(jda, response, channel, previous, channel.getParent(), IDENTIFIER);
+    public TextChannelUpdatedParentEvent(JDA jda, Long response, TextChannel channel, Category oldParent) {
+        super(jda, response, channel, oldParent, channel.getParent(), IDENTIFIER);
     }
 
     public Category getOldParent() {

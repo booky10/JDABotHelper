@@ -12,6 +12,7 @@ public class MessageUpdatedEvent extends MessageEvent {
 
     public MessageUpdatedEvent(JDA api, Long responseNumber, Message message) {
         super(api, responseNumber, message.getIdLong(), message.getChannel());
+
         this.message = message;
     }
 
@@ -20,10 +21,10 @@ public class MessageUpdatedEvent extends MessageEvent {
     }
 
     public User getAuthor() {
-        return message.getAuthor();
+        return getMessage().getAuthor();
     }
 
     public Member getMember() {
-        return message.getMember();
+        return getMessage().getMember();
     }
 }

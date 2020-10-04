@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.entities.User;
 
 public class ReactionRemoveEvent extends ReactionEvent {
 
-    public ReactionRemoveEvent(JDA api, Long responseNumber, User user, Member member, MessageReaction reaction, Long userID) {
-        super(api, responseNumber, user, member, reaction, userID);
+    public ReactionRemoveEvent(JDA api, Long responseNumber, User user, Member member, MessageReaction removedReaction, Long userID) {
+        super(api, responseNumber, user, member, removedReaction, userID);
     }
 }

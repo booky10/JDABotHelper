@@ -4,9 +4,9 @@ package tk.booky.jdahelper.api.event.events.category;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Category;
 import org.jetbrains.annotations.NotNull;
-import tk.booky.jdahelper.api.event.api.IUpdateEvent;
+import tk.booky.jdahelper.api.event.api.IUpdatedEvent;
 
-public class CategoryUpdatedEvent<T> extends CategoryEvent implements IUpdateEvent<Category, T> {
+public class CategoryUpdatedEvent<T> extends CategoryEvent implements IUpdatedEvent<Category, T> {
 
     protected final T previous, next;
     protected final String identifier;

@@ -4,8 +4,6 @@ package tk.booky.jdahelper.api.event.events.user;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.User;
 
-import javax.annotation.Nullable;
-
 public class UserUpdatedAvatarEvent extends UserUpdatedEvent<String> {
 
     public static final String IDENTIFIER = "avatar";
@@ -19,7 +17,7 @@ public class UserUpdatedAvatarEvent extends UserUpdatedEvent<String> {
     }
 
     public String getOldAvatarURL() {
-        return previous == null ? null : String.format(User.AVATAR_URL, getUser().getId(), previous, previous.startsWith("a_") ? "gif" : "png");
+        return getOldAvatarID() == null ? null : String.format(User.AVATAR_URL, getUser().getId(), getOldAvatarID(), getOldAvatarID().startsWith("a_") ? "gif" : "png");
     }
 
     public String getNewAvatarID() {
@@ -27,6 +25,6 @@ public class UserUpdatedAvatarEvent extends UserUpdatedEvent<String> {
     }
 
     public String getNewAvatarURL() {
-        return next == null ? null : String.format(User.AVATAR_URL, getUser().getId(), next, next.startsWith("a_") ? "gif" : "png");
+        return getNewAvatarID() == null ? null : String.format(User.AVATAR_URL, getUser().getId(), getNewAvatarID(), getNewAvatarID().startsWith("a_") ? "gif" : "png");
     }
 }

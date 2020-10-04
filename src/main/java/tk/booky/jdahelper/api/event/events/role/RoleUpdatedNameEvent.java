@@ -8,8 +8,8 @@ public class RoleUpdatedNameEvent extends RoleUpdatedEvent<String> {
 
     public static final String IDENTIFIER = "name";
 
-    public RoleUpdatedNameEvent(JDA jda, Long response, Role role, String previous, String next) {
-        super(jda, response, role, previous, next, IDENTIFIER);
+    public RoleUpdatedNameEvent(JDA jda, Long response, Role role, String oldName) {
+        super(jda, response, role, oldName, role.getName(), IDENTIFIER);
     }
 
     public String getOldName() {
@@ -18,15 +18,5 @@ public class RoleUpdatedNameEvent extends RoleUpdatedEvent<String> {
 
     public String getNewName() {
         return getNewValue();
-    }
-
-    @Override
-    public String getOldValue() {
-        return super.getOldValue();
-    }
-
-    @Override
-    public String getNewValue() {
-        return super.getNewValue();
     }
 }

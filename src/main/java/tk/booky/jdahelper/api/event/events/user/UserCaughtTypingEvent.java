@@ -13,6 +13,7 @@ public class UserCaughtTypingEvent extends UserEvent {
 
     public UserCaughtTypingEvent(JDA jda, Long response, User user, MessageChannel channel, OffsetDateTime timestamp) {
         super(jda, response, user);
+
         this.channel = channel;
         this.timestamp = timestamp;
     }

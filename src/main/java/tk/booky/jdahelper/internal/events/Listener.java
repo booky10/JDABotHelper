@@ -66,7 +66,7 @@ import net.dv8tion.jda.api.events.user.update.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import tk.booky.jdahelper.api.event.api.Event;
-import tk.booky.jdahelper.api.event.events.other.EntityUpdateEvent;
+import tk.booky.jdahelper.api.event.events.other.UpdatedEvent;
 
 public final class Listener extends ListenerAdapter {
 
@@ -77,7 +77,7 @@ public final class Listener extends ListenerAdapter {
 
     @Override
     public void onGenericUpdate(@NotNull UpdateEvent<?, ?> event) {
-        new EntityUpdateEvent<>(event.getJDA(), event.getResponseNumber(), event.getPropertyIdentifier(), event.getEntity(), event.getOldValue(), event.getNewValue()).call();
+        new UpdatedEvent<>(event.getJDA(), event.getResponseNumber(), event.getPropertyIdentifier(), event.getEntity(), event.getOldValue(), event.getNewValue()).call();
     }
 
     @Override

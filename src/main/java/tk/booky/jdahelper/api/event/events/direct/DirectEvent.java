@@ -27,7 +27,7 @@ public class DirectEvent extends Event {
     }
 
     public User getUser() {
-        return channel.getUser();
+        return getChannel().getUser();
     }
 
     public String getID() {
@@ -35,7 +35,7 @@ public class DirectEvent extends Event {
     }
 
     public Long getIDLong() {
-        return channel.getIdLong();
+        return getChannel().getIdLong();
     }
 
     public String getUserID() {

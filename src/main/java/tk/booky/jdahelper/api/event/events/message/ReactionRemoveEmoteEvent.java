@@ -7,18 +7,19 @@ import net.dv8tion.jda.api.entities.MessageReaction;
 
 public class ReactionRemoveEmoteEvent extends MessageEvent {
 
-    private final MessageReaction reaction;
+    private final MessageReaction removedReaction;
 
-    public ReactionRemoveEmoteEvent(JDA api, Long responseNumber, Long messageId, MessageChannel channel, MessageReaction reaction) {
-        super(api, responseNumber, messageId, channel);
-        this.reaction = reaction;
+    public ReactionRemoveEmoteEvent(JDA api, Long responseNumber, Long messageID, MessageChannel channel, MessageReaction removedReaction) {
+        super(api, responseNumber, messageID, channel);
+
+        this.removedReaction = removedReaction;
     }
 
-    public MessageReaction getReaction() {
-        return reaction;
+    public MessageReaction getRemovedReaction() {
+        return removedReaction;
     }
 
     public MessageReaction.ReactionEmote getReactionEmote() {
-        return reaction.getReactionEmote();
+        return getRemovedReaction().getReactionEmote();
     }
 }

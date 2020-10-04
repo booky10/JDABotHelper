@@ -3,15 +3,16 @@ package tk.booky.jdahelper.api.event.events.emote;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Emote;
-import tk.booky.jdahelper.api.event.api.IUpdateEvent;
+import tk.booky.jdahelper.api.event.api.IUpdatedEvent;
 
-public class EmoteUpdatedEvent<T> extends EmoteEvent implements IUpdateEvent<Emote, T> {
+public class EmoteUpdatedEvent<T> extends EmoteEvent implements IUpdatedEvent<Emote, T> {
 
     protected final T previous, next;
     protected final String identifier;
 
     public EmoteUpdatedEvent(JDA jda, Long response, Emote emote, T previous, T next, String identifier) {
         super(jda, response, emote);
+
         this.previous = previous;
         this.next = next;
         this.identifier = identifier;

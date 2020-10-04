@@ -21,6 +21,7 @@ public class HTTPRequestEvent extends Event {
 
     public HTTPRequestEvent(Request<?> request, Response response) {
         super(request.getJDA());
+
         this.request = request;
         this.response = response;
     }

@@ -3,39 +3,40 @@ package tk.booky.jdahelper.api.event.events.other;
 
 import net.dv8tion.jda.api.JDA;
 import tk.booky.jdahelper.api.event.api.Event;
+import tk.booky.jdahelper.api.event.api.IUpdatedEvent;
 
-public class EntityUpdateEvent<E, T> extends Event {
+public class UpdatedEvent<E, T> extends Event implements IUpdatedEvent<E, T> {
 
     private final String identifier;
     private final E entity;
     private final T oldValue, newValue;
 
-    public EntityUpdateEvent(JDA jda, Long response, String identifier, E entity, T oldValue, T newValue) {
+    public UpdatedEvent(JDA jda, Long response, String identifier, E entity, T oldValue, T newValue) {
         super(jda, response);
+
         this.identifier = identifier;
         this.entity = entity;
         this.oldValue = oldValue;
         this.newValue = newValue;
     }
 
-    public String getIdentifier() {
+    @Override
+    public String getPropertyIdentifier() {
         return identifier;
     }
 
+    @Override
     public E getEntity() {
         return entity;
     }
 
+    @Override
     public T getOldValue() {
         return oldValue;
     }
 
+    @Override
     public T getNewValue() {
         return newValue;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Class<E> getEntityClass() {
-        return (Class<E>) entity.getClass();
     }
 }

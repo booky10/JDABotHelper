@@ -12,11 +12,12 @@ public class EmoteEvent extends Event {
 
     public EmoteEvent(JDA jda, Long response, Emote emote) {
         super(jda, response);
+
         this.emote = emote;
     }
 
     public Guild getGuild() {
-        return emote.getGuild();
+        return getEmote().getGuild();
     }
 
     public Emote getEmote() {
@@ -24,6 +25,14 @@ public class EmoteEvent extends Event {
     }
 
     public Boolean isManaged() {
-        return emote.isManaged();
+        return getEmote().isManaged();
+    }
+
+    public String getID() {
+        return Long.toUnsignedString(getIDLong());
+    }
+
+    public Long getIDLong() {
+        return getEmote().getIdLong();
     }
 }

@@ -3,8 +3,6 @@ package tk.booky.jdahelper.api.event.events.self;
 
 import net.dv8tion.jda.api.JDA;
 
-import javax.annotation.Nonnull;
-
 public class SelfUpdatedMFAEvent extends SelfUpdatedEvent<Boolean> {
 
     public static final String IDENTIFIER = "mfa_enabled";
@@ -13,20 +11,11 @@ public class SelfUpdatedMFAEvent extends SelfUpdatedEvent<Boolean> {
         super(api, responseNumber, wasMFAEnabled, !wasMFAEnabled, IDENTIFIER);
     }
 
-    public boolean wasMFAEnabled()
-    {
+    public Boolean wasMFAEnabled() {
         return getOldValue();
     }
 
-    @Override
-    public Boolean getOldValue()
-    {
-        return super.getOldValue();
-    }
-
-    @Override
-    public Boolean getNewValue()
-    {
-        return super.getNewValue();
+    public Boolean isMFAEnabled() {
+        return getNewValue();
     }
 }

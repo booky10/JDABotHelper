@@ -14,6 +14,7 @@ public class PermissionOverrideUpdatedEvent extends PermissionOverrideEvent {
 
     public PermissionOverrideUpdatedEvent(JDA jda, Long response, GuildChannel channel, PermissionOverride override, Long oldAllow, Long oldDeny) {
         super(jda, response, channel, override);
+
         this.oldAllow = oldAllow;
         this.oldDeny = oldDeny;
     }
@@ -27,15 +28,15 @@ public class PermissionOverrideUpdatedEvent extends PermissionOverrideEvent {
     }
 
     public Long getOldInheritedRaw() {
-        return ~(oldAllow | oldDeny);
+        return ~(getOldAllowRaw() | getOldDenyRaw());
     }
 
     public EnumSet<Permission> getOldAllow() {
-        return Permission.getPermissions(oldAllow);
+        return Permission.getPermissions(getOldAllowRaw());
     }
 
     public EnumSet<Permission> getOldDeny() {
-        return Permission.getPermissions(oldDeny);
+        return Permission.getPermissions(getOldDenyRaw());
     }
 
     public EnumSet<Permission> getOldInherited() {

@@ -13,6 +13,7 @@ public class UserActivityStartedEvent extends UserEvent implements IUserActivity
 
     public UserActivityStartedEvent(JDA jda, Long response, Member member, Activity newActivity) {
         super(jda, response, member.getUser());
+
         this.newActivity = newActivity;
         this.member = member;
     }
@@ -23,7 +24,7 @@ public class UserActivityStartedEvent extends UserEvent implements IUserActivity
 
     @Override
     public Guild getGuild() {
-        return member.getGuild();
+        return getMember().getGuild();
     }
 
     @Override

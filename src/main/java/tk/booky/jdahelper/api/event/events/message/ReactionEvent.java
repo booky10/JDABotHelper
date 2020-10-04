@@ -9,14 +9,13 @@ import net.dv8tion.jda.internal.requests.CompletedRestAction;
 public class ReactionEvent extends MessageEvent {
 
     protected final Long userID;
-    protected User issuer;
-    protected Member member;
-    protected MessageReaction reaction;
+    protected final User issuer;
+    protected final Member member;
+    protected final MessageReaction reaction;
 
-
-    public ReactionEvent(JDA api, Long responseNumber, User user,
-                         Member member, MessageReaction reaction, Long userID) {
+    public ReactionEvent(JDA api, Long responseNumber, User user, Member member, MessageReaction reaction, Long userID) {
         super(api, responseNumber, reaction.getMessageIdLong(), reaction.getChannel());
+
         this.userID = userID;
         this.issuer = user;
         this.member = member;
@@ -28,7 +27,7 @@ public class ReactionEvent extends MessageEvent {
     }
 
     public String getUserID() {
-        return Long.toUnsignedString(userID);
+        return Long.toUnsignedString(getUserIDLong());
     }
 
     public User getUser() {
@@ -44,11 +43,11 @@ public class ReactionEvent extends MessageEvent {
     }
 
     public MessageReaction.ReactionEmote getReactionEmote() {
-        return reaction.getReactionEmote();
+        return getReaction().getReactionEmote();
     }
 
     public RestAction<Member> retrieveMember() {
-        if (member != null) return new CompletedRestAction<>(getJDA(), member);
+        if (getMember() != null) return new CompletedRestAction<>(getJDA(), getMember());
         return getGuild().retrieveMemberById(getUserIDLong());
     }
 

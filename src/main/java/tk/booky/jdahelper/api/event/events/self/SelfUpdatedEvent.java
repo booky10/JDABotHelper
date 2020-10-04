@@ -4,15 +4,16 @@ package tk.booky.jdahelper.api.event.events.self;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.SelfUser;
 import tk.booky.jdahelper.api.event.api.Event;
-import tk.booky.jdahelper.api.event.api.IUpdateEvent;
+import tk.booky.jdahelper.api.event.api.IUpdatedEvent;
 
-public class SelfUpdatedEvent<T> extends Event implements IUpdateEvent<SelfUser, T> {
+public class SelfUpdatedEvent<T> extends Event implements IUpdatedEvent<SelfUser, T> {
 
     protected final T previous, next;
     protected final String identifier;
 
     public SelfUpdatedEvent(JDA jda, Long response, T previous, T next, String identifier) {
         super(jda, response);
+
         this.previous = previous;
         this.next = next;
         this.identifier = identifier;

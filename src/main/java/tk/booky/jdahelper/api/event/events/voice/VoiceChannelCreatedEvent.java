@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 
 public class VoiceChannelCreatedEvent extends VoiceChannelEvent{
 
-    public VoiceChannelCreatedEvent(JDA jda, Long response, VoiceChannel channel) {
-        super(jda, response, channel);
+    public VoiceChannelCreatedEvent(JDA jda, Long response, VoiceChannel createdChannel) {
+        super(jda, response, createdChannel);
     }
 }

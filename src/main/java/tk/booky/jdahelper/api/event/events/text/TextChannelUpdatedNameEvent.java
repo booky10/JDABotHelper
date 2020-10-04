@@ -8,8 +8,8 @@ public class TextChannelUpdatedNameEvent extends TextChannelUpdatedEvent<String>
 
     public static final String IDENTIFIER = "name";
 
-    public TextChannelUpdatedNameEvent(JDA jda, Long response, TextChannel channel, String previous, String next, String identifier) {
-        super(jda, response, channel, previous, channel.getName(), IDENTIFIER);
+    public TextChannelUpdatedNameEvent(JDA jda, Long response, TextChannel channel, String oldName) {
+        super(jda, response, channel, oldName, channel.getName(), IDENTIFIER);
     }
 
     public String getOldName() {

@@ -5,7 +5,6 @@ import tk.booky.jdahelper.api.event.api.AbstractEventManager;
 import tk.booky.jdahelper.api.event.api.Event;
 import tk.booky.jdahelper.api.event.api.HandleEvent;
 import tk.booky.jdahelper.api.event.api.IListener;
-import tk.booky.jdahelper.utils.Pair;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
@@ -46,6 +45,7 @@ public final class EventManager extends AbstractEventManager {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public final void registerListener(IListener listener) {
         for (Method method : listener.getClass().getDeclaredMethods()) {
             method.setAccessible(true);

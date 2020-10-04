@@ -3,9 +3,9 @@ package tk.booky.jdahelper.api.event.events.other;
 
 import net.dv8tion.jda.api.JDA;
 import tk.booky.jdahelper.api.event.api.Event;
-import tk.booky.jdahelper.api.event.api.IUpdateEvent;
+import tk.booky.jdahelper.api.event.api.IUpdatedEvent;
 
-public class StatusEvent extends Event implements IUpdateEvent<JDA, JDA.Status> {
+public class StatusEvent extends Event implements IUpdatedEvent<JDA, JDA.Status> {
 
     public static final String IDENTIFIER = "status";
 
@@ -13,6 +13,7 @@ public class StatusEvent extends Event implements IUpdateEvent<JDA, JDA.Status> 
 
     public StatusEvent(JDA api, JDA.Status newStatus, JDA.Status oldStatus) {
         super(api);
+
         this.newStatus = newStatus;
         this.oldStatus = oldStatus;
     }

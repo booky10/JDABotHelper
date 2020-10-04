@@ -12,6 +12,7 @@ public class RoleEvent extends Event {
 
     public RoleEvent(JDA jda, Long response, Role role) {
         super(jda, response);
+
         this.role = role;
     }
 
@@ -20,6 +21,22 @@ public class RoleEvent extends Event {
     }
 
     public Guild getGuild() {
-        return role.getGuild();
+        return getRole().getGuild();
+    }
+
+    public String getRoleID() {
+        return Long.toUnsignedString(getRoleIDLong());
+    }
+
+    public Long getRoleIDLong() {
+        return getRole().getIdLong();
+    }
+
+    public String getGuildID() {
+        return Long.toUnsignedString(getGuildIDLong());
+    }
+
+    public Long getGuildIDLong() {
+        return getGuild().getIdLong();
     }
 }

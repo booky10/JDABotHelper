@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.StoreChannel;
 
 public class StoreChannelDeletedEvent extends StoreChannelEvent {
 
-    public StoreChannelDeletedEvent(JDA jda, Long response, StoreChannel channel) {
-        super(jda, response, channel);
+    public StoreChannelDeletedEvent(JDA jda, Long response, StoreChannel deletedChannel) {
+        super(jda, response, deletedChannel);
     }
 }

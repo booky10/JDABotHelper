@@ -3,25 +3,26 @@ package tk.booky.jdahelper.api.event.events.gateway;
 
 import net.dv8tion.jda.api.JDA;
 import tk.booky.jdahelper.api.event.api.Event;
-import tk.booky.jdahelper.api.event.api.IUpdateEvent;
+import tk.booky.jdahelper.api.event.api.IUpdatedEvent;
 
-public class GatewayPingedEvent extends Event implements IUpdateEvent<JDA, Long> {
+public class GatewayPingedEvent extends Event implements IUpdatedEvent<JDA, Long> {
 
     public static final String IDENTIFIER = "gateway-ping";
-    private final long next, prev;
+    protected final Long next, previous;
 
     public GatewayPingedEvent(JDA jda, long old) {
         super(jda);
+
         next = jda.getGatewayPing();
-        prev = old;
+        previous = old;
     }
 
-    public long getNewPing() {
-        return next;
+    public Long getNewPing() {
+        return getNewValue();
     }
 
-    public long getOldPing() {
-        return prev;
+    public Long getOldPing() {
+        return getOldValue();
     }
 
     @Override
@@ -36,7 +37,7 @@ public class GatewayPingedEvent extends Event implements IUpdateEvent<JDA, Long>
 
     @Override
     public Long getOldValue() {
-        return prev;
+        return previous;
     }
 
     @Override

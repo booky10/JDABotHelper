@@ -15,14 +15,15 @@ public class UserActivityUpdatedOrderEvent extends UserUpdatedEvent<List<Activit
 
     protected final Member member;
 
-    public UserActivityUpdatedOrderEvent(JDA jda, Long response, User user, List<Activity> previous, Member member) {
-        super(jda, response, user, previous, Activity.fromJDA(member.getActivities()), IDENTIFIER);
+    public UserActivityUpdatedOrderEvent(JDA jda, Long response, User user, List<Activity> oldActivities, Member member) {
+        super(jda, response, user, oldActivities, Activity.fromJDA(member.getActivities()), IDENTIFIER);
+
         this.member = member;
     }
 
     @Override
     public Guild getGuild() {
-        return member.getGuild();
+        return getMember().getGuild();
     }
 
     @Override

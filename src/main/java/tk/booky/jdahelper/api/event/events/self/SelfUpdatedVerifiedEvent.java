@@ -9,11 +9,19 @@ public class SelfUpdatedVerifiedEvent extends SelfUpdatedEvent<Boolean> {
 
     public static final String IDENTIFIER = "verified";
 
-    public SelfUpdatedVerifiedEvent(JDA jda, Long response, boolean wasVerified) {
+    public SelfUpdatedVerifiedEvent(JDA jda, Long response, Boolean wasVerified) {
         super(jda, response, wasVerified, !wasVerified, IDENTIFIER);
 
         Logger logger = LoggerFactory.getLogger("Verified");
         if (!wasVerified) logger.info("You're bot has just been verified! GG!");
         else logger.info("OK, how did you're bot get unverified? Just tell me that!");
+    }
+
+    public Boolean wasVerified() {
+        return getOldValue();
+    }
+
+    public Boolean isVerified() {
+        return getNewValue();
     }
 }

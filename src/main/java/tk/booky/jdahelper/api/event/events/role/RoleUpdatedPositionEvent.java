@@ -10,10 +10,11 @@ public class RoleUpdatedPositionEvent extends RoleUpdatedEvent<Integer> {
 
     private final Integer oldPositionRaw, newPositionRaw;
 
-    public RoleUpdatedPositionEvent(JDA jda, Long response, Role role, Integer previous, Integer oldPositionRaw, Integer newPositionRaw) {
-        super(jda, response, role, previous, role.getPosition(), IDENTIFIER);
+    public RoleUpdatedPositionEvent(JDA jda, Long response, Role role, Integer oldPositionRaw) {
+        super(jda, response, role, oldPositionRaw, role.getPosition(), IDENTIFIER);
+
         this.oldPositionRaw = oldPositionRaw;
-        this.newPositionRaw = newPositionRaw;
+        this.newPositionRaw = role.getPositionRaw();
     }
 
     public Integer getOldPosition() {
@@ -24,21 +25,11 @@ public class RoleUpdatedPositionEvent extends RoleUpdatedEvent<Integer> {
         return getNewValue();
     }
 
-    public Integer getOldPositionRaw(){
+    public Integer getOldPositionRaw() {
         return oldPositionRaw;
     }
 
     public Integer getNewPositionRaw() {
         return newPositionRaw;
-    }
-
-    @Override
-    public Integer getOldValue() {
-        return super.getOldValue();
-    }
-
-    @Override
-    public Integer getNewValue() {
-        return super.getNewValue();
     }
 }

@@ -13,6 +13,7 @@ public class UserActivityEndedEvent extends UserEvent implements IUserActivityEv
 
     public UserActivityEndedEvent(JDA jda, Long response, Member member, Activity oldActivity) {
         super(jda, response, member.getUser());
+
         this.oldActivity = oldActivity;
         this.member = member;
     }
@@ -23,7 +24,7 @@ public class UserActivityEndedEvent extends UserEvent implements IUserActivityEv
 
     @Override
     public Guild getGuild() {
-        return member.getGuild();
+        return getMember().getGuild();
     }
 
     @Override

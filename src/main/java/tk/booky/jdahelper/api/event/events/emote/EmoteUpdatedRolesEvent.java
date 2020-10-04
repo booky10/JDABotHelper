@@ -11,8 +11,8 @@ public class EmoteUpdatedRolesEvent extends EmoteUpdatedEvent<List<Role>> {
 
     public static final String IDENTIFIER = "roles";
 
-    public EmoteUpdatedRolesEvent(JDA jda, Long response, Emote emote, List<Role> previous, List<Role> next) {
-        super(jda, response, emote, previous, next, IDENTIFIER);
+    public EmoteUpdatedRolesEvent(JDA jda, Long response, Emote emote, List<Role> oldRoles) {
+        super(jda, response, emote, oldRoles, emote.getRoles(), IDENTIFIER);
     }
 
     public List<Role> getOldRoles() {
@@ -21,15 +21,5 @@ public class EmoteUpdatedRolesEvent extends EmoteUpdatedEvent<List<Role>> {
 
     public List<Role> getNewRoles() {
         return getNewValue();
-    }
-
-    @Override
-    public List<Role> getOldValue() {
-        return super.getOldValue();
-    }
-
-    @Override
-    public List<Role> getNewValue() {
-        return super.getNewValue();
     }
 }

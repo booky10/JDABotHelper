@@ -13,17 +13,11 @@ public class RoleUpdatedMentionable extends RoleUpdatedEvent<Boolean> {
         super(api, responseNumber, role, wasMentionable, !wasMentionable, IDENTIFIER);
     }
 
-    public boolean wasMentionable() {
+    public Boolean wasMentionable() {
         return getOldValue();
     }
 
-    @Override
-    public Boolean getOldValue() {
-        return super.getOldValue();
-    }
-
-    @Override
-    public Boolean getNewValue() {
-        return super.getNewValue();
+    public Boolean isMentionable(){
+        return getNewValue();
     }
 }

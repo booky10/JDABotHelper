@@ -7,12 +7,13 @@ import tk.booky.jdahelper.api.event.api.Event;
 
 public class MessageEvent extends Event {
 
-    protected final Long messageId;
+    protected final Long messageID;
     protected final MessageChannel channel;
 
-    public MessageEvent(JDA api, Long responseNumber, Long messageId, MessageChannel channel) {
+    public MessageEvent(JDA api, Long responseNumber, Long messageID, MessageChannel channel) {
         super(api, responseNumber);
-        this.messageId = messageId;
+
+        this.messageID = messageID;
         this.channel = channel;
     }
 
@@ -21,15 +22,15 @@ public class MessageEvent extends Event {
     }
 
     public Long getMessageIDLong() {
-        return messageId;
+        return messageID;
     }
 
     public String getMessageID() {
-        return Long.toUnsignedString(messageId);
+        return Long.toUnsignedString(getMessageIDLong());
     }
 
     public boolean isFromType(ChannelType type) {
-        return channel.getType() == type;
+        return getChannel().getType() == type;
     }
 
     public boolean isFromGuild() {
@@ -37,7 +38,7 @@ public class MessageEvent extends Event {
     }
 
     public ChannelType getChannelType() {
-        return channel.getType();
+        return getChannel().getType();
     }
 
     public Guild getGuild() {
@@ -46,11 +47,11 @@ public class MessageEvent extends Event {
 
     public TextChannel getTextChannel() {
         if (!isFromType(ChannelType.TEXT)) throw new IllegalStateException("This message event did not happen in a text channel");
-        return (TextChannel) channel;
+        return (TextChannel) getChannel();
     }
 
     public PrivateChannel getPrivateChannel() {
         if (!isFromType(ChannelType.PRIVATE)) throw new IllegalStateException("This message event did not happen in a private channel");
-        return (PrivateChannel) channel;
+        return (PrivateChannel) getChannel();
     }
 }

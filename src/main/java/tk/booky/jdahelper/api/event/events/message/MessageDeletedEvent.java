@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 
 public class MessageDeletedEvent extends MessageEvent{
 
-    public MessageDeletedEvent(JDA api, Long responseNumber, Long messageId, MessageChannel channel) {
-        super(api, responseNumber, messageId, channel);
+    public MessageDeletedEvent(JDA api, Long responseNumber, Long messageID, MessageChannel channel) {
+        super(api, responseNumber, messageID, channel);
     }
 }

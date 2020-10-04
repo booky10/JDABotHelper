@@ -9,6 +9,14 @@ public class TextChannelUpdatedNSFWEvent extends TextChannelUpdatedEvent<Boolean
     public static final String IDENTIFIER = "nsfw";
 
     public TextChannelUpdatedNSFWEvent(JDA jda, Long response, TextChannel channel, Boolean oldNSFW) {
-        super(jda, response, channel, oldNSFW, channel.isNSFW(), IDENTIFIER);
+        super(jda, response, channel, oldNSFW, !oldNSFW, IDENTIFIER);
+    }
+
+    public Boolean wasNSFW() {
+        return getOldValue();
+    }
+
+    public Boolean isNSFW() {
+        return getNewValue();
     }
 }

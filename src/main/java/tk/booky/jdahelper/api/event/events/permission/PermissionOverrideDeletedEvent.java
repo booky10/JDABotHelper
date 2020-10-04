@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.entities.PermissionOverride;
 
 public class PermissionOverrideDeletedEvent extends PermissionOverrideEvent {
 
-    public PermissionOverrideDeletedEvent(JDA jda, Long response, GuildChannel channel, PermissionOverride override) {
-        super(jda, response, channel, override);
+    public PermissionOverrideDeletedEvent(JDA jda, Long response, GuildChannel channel, PermissionOverride deletedOverride) {
+        super(jda, response, channel, deletedOverride);
     }
 }

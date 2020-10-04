@@ -12,8 +12,9 @@ public class EmbedReceiveEvent extends MessageEvent {
 
     private final List<MessageEmbed> embeds;
 
-    public EmbedReceiveEvent(JDA api, Long responseNumber, Long messageId, MessageChannel channel, List<MessageEmbed> embeds) {
-        super(api, responseNumber, messageId, channel);
+    public EmbedReceiveEvent(JDA api, Long responseNumber, Long messageID, MessageChannel channel, List<MessageEmbed> embeds) {
+        super(api, responseNumber, messageID, channel);
+
         this.embeds = Collections.unmodifiableList(embeds);
     }
 

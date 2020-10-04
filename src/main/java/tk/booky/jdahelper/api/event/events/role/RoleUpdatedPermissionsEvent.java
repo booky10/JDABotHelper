@@ -13,10 +13,11 @@ public class RoleUpdatedPermissionsEvent extends RoleUpdatedEvent<EnumSet<Permis
 
     private final Long oldPermissionRaw, newPermissionsRaw;
 
-    public RoleUpdatedPermissionsEvent(JDA jda, Long response, Role role, Long oldPermissionRaw, Long newPermissionsRaw) {
+    public RoleUpdatedPermissionsEvent(JDA jda, Long response, Role role, Long oldPermissionRaw) {
         super(jda, response, role, Permission.getPermissions(oldPermissionRaw), role.getPermissions(), IDENTIFIER);
+
         this.oldPermissionRaw = oldPermissionRaw;
-        this.newPermissionsRaw = newPermissionsRaw;
+        this.newPermissionsRaw = role.getPermissionsRaw();
     }
 
     public Long getOldPermissionRaw() {
@@ -25,16 +26,6 @@ public class RoleUpdatedPermissionsEvent extends RoleUpdatedEvent<EnumSet<Permis
 
     public Long getNewPermissionsRaw() {
         return newPermissionsRaw;
-    }
-
-    @Override
-    public EnumSet<Permission> getOldValue() {
-        return super.getOldValue();
-    }
-
-    @Override
-    public EnumSet<Permission> getNewValue() {
-        return super.getNewValue();
     }
 
     public EnumSet<Permission> getOldPermissions() {

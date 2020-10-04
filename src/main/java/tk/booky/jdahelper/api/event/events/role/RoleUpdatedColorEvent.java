@@ -15,28 +15,18 @@ public class RoleUpdatedColorEvent extends RoleUpdatedEvent<Integer> {
     }
 
     public Color getOldColor() {
-        return previous != Role.DEFAULT_COLOR_RAW ? new Color(previous) : null;
+        return getOldColorRaw() != Role.DEFAULT_COLOR_RAW ? new Color(getOldColorRaw()) : null;
     }
 
-    public int getOldColorRaw() {
+    public Integer getOldColorRaw() {
         return getOldValue();
     }
 
     public Color getNewColor() {
-        return next != Role.DEFAULT_COLOR_RAW ? new Color(next) : null;
+        return getNewColorRaw() != Role.DEFAULT_COLOR_RAW ? new Color(getNewColorRaw()) : null;
     }
 
-    public int getNewColorRaw() {
+    public Integer getNewColorRaw() {
         return getNewValue();
-    }
-
-    @Override
-    public Integer getOldValue() {
-        return super.getOldValue();
-    }
-
-    @Override
-    public Integer getNewValue() {
-        return super.getNewValue();
     }
 }

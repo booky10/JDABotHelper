@@ -8,8 +8,8 @@ public class StoreChannelUpdatedNameEvent extends StoreChannelUpdatedEvent<Strin
 
     public static final String IDENTIFIER = "name";
 
-    public StoreChannelUpdatedNameEvent(JDA jda, Long response, StoreChannel channel, String prev) {
-        super(jda, response, channel, prev, channel.getName(), IDENTIFIER);
+    public StoreChannelUpdatedNameEvent(JDA jda, Long response, StoreChannel channel, String oldName) {
+        super(jda, response, channel, oldName, channel.getName(), IDENTIFIER);
     }
 
     public String getOldName() {
@@ -18,15 +18,5 @@ public class StoreChannelUpdatedNameEvent extends StoreChannelUpdatedEvent<Strin
 
     public String getNewName() {
         return getNewValue();
-    }
-
-    @Override
-    public String getOldValue() {
-        return super.getOldValue();
-    }
-
-    @Override
-    public String getNewValue() {
-        return super.getNewValue();
     }
 }

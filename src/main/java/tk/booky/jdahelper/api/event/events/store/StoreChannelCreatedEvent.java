@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.StoreChannel;
 
 public class StoreChannelCreatedEvent extends StoreChannelEvent{
 
-    public StoreChannelCreatedEvent(JDA jda, Long response, StoreChannel channel) {
-        super(jda, response, channel);
+    public StoreChannelCreatedEvent(JDA jda, Long response, StoreChannel createdChannel) {
+        super(jda, response, createdChannel);
     }
 }

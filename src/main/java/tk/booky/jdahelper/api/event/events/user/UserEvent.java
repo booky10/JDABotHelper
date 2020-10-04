@@ -11,10 +11,19 @@ public class UserEvent extends Event {
 
     public UserEvent(JDA jda, Long response, User user) {
         super(jda, response);
+
         this.user = user;
     }
 
     public User getUser() {
         return user;
+    }
+
+    public String getUserID() {
+        return Long.toUnsignedString(getUserIDLong());
+    }
+
+    public Long getUserIDLong() {
+        return getUser().getIdLong();
     }
 }

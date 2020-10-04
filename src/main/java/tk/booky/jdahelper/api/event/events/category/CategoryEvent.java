@@ -25,10 +25,10 @@ public class CategoryEvent extends Event {
     }
 
     public Long getIDLong() {
-        return category.getIdLong();
+        return getCategory().getIdLong();
     }
 
     public Guild getGuild() {
-        return category.getGuild();
+        return getCategory().getGuild();
     }
 }

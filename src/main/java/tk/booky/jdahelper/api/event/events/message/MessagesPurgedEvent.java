@@ -16,6 +16,7 @@ public class MessagesPurgedEvent extends Event {
 
     public MessagesPurgedEvent(JDA jda, Long response, TextChannel channel, List<String> messageIDs) {
         super(jda, response);
+
         this.channel = channel;
         this.messageIDs = Collections.unmodifiableList(messageIDs);
     }
@@ -29,6 +30,6 @@ public class MessagesPurgedEvent extends Event {
     }
 
     public Guild getGuild() {
-        return channel.getGuild();
+        return getChannel().getGuild();
     }
 }

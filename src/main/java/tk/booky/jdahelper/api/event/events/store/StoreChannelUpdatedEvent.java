@@ -3,16 +3,17 @@ package tk.booky.jdahelper.api.event.events.store;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.StoreChannel;
-import tk.booky.jdahelper.api.event.api.IUpdateEvent;
+import tk.booky.jdahelper.api.event.api.IUpdatedEvent;
 
-public class StoreChannelUpdatedEvent<T> extends StoreChannelEvent implements IUpdateEvent<StoreChannel, T> {
+public class StoreChannelUpdatedEvent<T> extends StoreChannelEvent implements IUpdatedEvent<StoreChannel, T> {
 
-    protected final T prev, next;
+    protected final T previous, next;
     protected final String identifier;
 
-    public StoreChannelUpdatedEvent(JDA jda, Long response, StoreChannel channel, T prev, T next, String identifier) {
+    public StoreChannelUpdatedEvent(JDA jda, Long response, StoreChannel channel, T previous, T next, String identifier) {
         super(jda, response, channel);
-        this.prev = prev;
+
+        this.previous = previous;
         this.next = next;
         this.identifier = identifier;
     }
@@ -29,7 +30,7 @@ public class StoreChannelUpdatedEvent<T> extends StoreChannelEvent implements IU
 
     @Override
     public T getOldValue() {
-        return prev;
+        return previous;
     }
 
     @Override

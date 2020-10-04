@@ -12,12 +12,13 @@ public class PermissionOverrideEvent extends GuildEvent {
 
     public PermissionOverrideEvent(JDA jda, Long response, GuildChannel channel, PermissionOverride override) {
         super(jda, response, channel.getGuild());
+
         this.channel = channel;
         this.override = override;
     }
 
     public ChannelType getChannelType() {
-        return channel.getType();
+        return getChannel().getType();
     }
 
     public GuildChannel getChannel() {
@@ -29,42 +30,42 @@ public class PermissionOverrideEvent extends GuildEvent {
     }
 
     public TextChannel getTextChannel() {
-        if (channel instanceof TextChannel) return (TextChannel) channel;
+        if (getChannel() instanceof TextChannel) return (TextChannel) getChannel();
         throw new IllegalStateException("This override is for a channel of type " + getChannelType());
     }
 
     public VoiceChannel getVoiceChannel() {
-        if (channel instanceof VoiceChannel) return (VoiceChannel) channel;
+        if (getChannel() instanceof VoiceChannel) return (VoiceChannel) getChannel();
         throw new IllegalStateException("This override is for a channel of type " + getChannelType());
     }
 
     public StoreChannel getStoreChannel() {
-        if (channel instanceof StoreChannel) return (StoreChannel) channel;
+        if (getChannel() instanceof StoreChannel) return (StoreChannel) getChannel();
         throw new IllegalStateException("This override is for a channel of type " + getChannelType());
     }
 
     public Category getCategory() {
-        if (channel instanceof Category) return (Category) channel;
+        if (getChannel() instanceof Category) return (Category) getChannel();
         throw new IllegalStateException("This override is for a channel of type " + getChannelType());
     }
 
     public boolean isRoleOverride() {
-        return override.isRoleOverride();
+        return getOverride().isRoleOverride();
     }
 
     public boolean isMemberOverride() {
-        return override.isMemberOverride();
+        return getOverride().isMemberOverride();
     }
 
     public IPermissionHolder getPermissionHolder() {
-        return isMemberOverride() ? override.getMember() : isRoleOverride() ? override.getRole() : null;
+        return isMemberOverride() ? getOverride().getMember() : isRoleOverride() ? getOverride().getRole() : null;
     }
 
     public Member getMember() {
-        return override.getMember();
+        return getOverride().getMember();
     }
 
     public Role getRole() {
-        return override.getRole();
+        return getOverride().getRole();
     }
 }

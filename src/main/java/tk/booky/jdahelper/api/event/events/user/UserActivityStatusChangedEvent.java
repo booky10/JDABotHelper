@@ -14,12 +14,13 @@ public class UserActivityStatusChangedEvent extends UserUpdatedEvent<Status> imp
 
     public UserActivityStatusChangedEvent(JDA jda, Long response, Member member, Status oldStatus) {
         super(jda, response, member.getUser(), oldStatus, Status.fromJDA(member.getOnlineStatus()), IDENTIFIER);
+
         this.member = member;
     }
 
     @Override
     public Guild getGuild() {
-        return member.getGuild();
+        return getMember().getGuild();
     }
 
     @Override

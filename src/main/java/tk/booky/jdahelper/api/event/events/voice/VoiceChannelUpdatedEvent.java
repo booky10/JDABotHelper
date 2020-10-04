@@ -3,15 +3,16 @@ package tk.booky.jdahelper.api.event.events.voice;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.VoiceChannel;
-import tk.booky.jdahelper.api.event.api.IUpdateEvent;
+import tk.booky.jdahelper.api.event.api.IUpdatedEvent;
 
-public class VoiceChannelUpdatedEvent<T> extends VoiceChannelEvent implements IUpdateEvent<VoiceChannel, T> {
+public class VoiceChannelUpdatedEvent<T> extends VoiceChannelEvent implements IUpdatedEvent<VoiceChannel, T> {
 
     protected final T previous, next;
     protected final String identifier;
 
     public VoiceChannelUpdatedEvent(JDA jda, Long response, VoiceChannel channel, T previous, T next, String identifier) {
         super(jda, response, channel);
+
         this.previous = previous;
         this.next = next;
         this.identifier = identifier;

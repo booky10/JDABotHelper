@@ -9,7 +9,7 @@ public class TextChannelUpdatedNewsEvent extends TextChannelUpdatedEvent<Boolean
     public static final String IDENTIFIER = "news";
 
     public TextChannelUpdatedNewsEvent(JDA jda, Long response, TextChannel channel, Boolean oldNews) {
-        super(jda, response, channel, oldNews, channel.isNews(), IDENTIFIER);
+        super(jda, response, channel, oldNews, !oldNews, IDENTIFIER);
     }
 
     public Boolean getOldNews() {

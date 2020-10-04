@@ -1,8 +1,9 @@
 package tk.booky.jdahelper.api.event.api;
 // Created by booky10 in JDABotHelper (22:23 30.09.20)
 
-public interface IUpdateEvent<E, T> {
+public interface IUpdatedEvent<E, T> {
 
+    @SuppressWarnings("unchecked")
     default Class<E> getEntityType() {
         return (Class<E>) getEntity().getClass();
     }

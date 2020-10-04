@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 
 public class VoiceChannelDeletedEvent extends VoiceChannelEvent {
 
-    public VoiceChannelDeletedEvent(JDA jda, Long response, VoiceChannel channel) {
-        super(jda, response, channel);
+    public VoiceChannelDeletedEvent(JDA jda, Long response, VoiceChannel deletedChannel) {
+        super(jda, response, deletedChannel);
     }
 }

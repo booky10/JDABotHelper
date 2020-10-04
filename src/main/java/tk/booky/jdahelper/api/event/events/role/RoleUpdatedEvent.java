@@ -3,15 +3,16 @@ package tk.booky.jdahelper.api.event.events.role;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Role;
-import tk.booky.jdahelper.api.event.api.IUpdateEvent;
+import tk.booky.jdahelper.api.event.api.IUpdatedEvent;
 
-public class RoleUpdatedEvent<T> extends RoleEvent implements IUpdateEvent<Role, T> {
+public class RoleUpdatedEvent<T> extends RoleEvent implements IUpdatedEvent<Role, T> {
 
     protected final T previous, next;
     protected final String identifier;
 
     public RoleUpdatedEvent(JDA jda, Long response, Role role, T previous, T next, String identifier) {
         super(jda, response, role);
+
         this.previous = previous;
         this.next = next;
         this.identifier = identifier;
@@ -37,6 +38,7 @@ public class RoleUpdatedEvent<T> extends RoleEvent implements IUpdateEvent<Role,
         return next;
     }
 
+    @Override
     public String toString() {
         return "RoleUpdate[" + getPropertyIdentifier() + "](" + getOldValue() + "->" + getNewValue() + ")";
     }

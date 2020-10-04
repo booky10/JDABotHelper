@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 
 public class TextChannelCreatedEvent extends TextChannelEvent{
 
-    public TextChannelCreatedEvent(JDA jda, Long response, TextChannel channel) {
-        super(jda, response, channel);
+    public TextChannelCreatedEvent(JDA jda, Long response, TextChannel createdChannel) {
+        super(jda, response, createdChannel);
     }
 }

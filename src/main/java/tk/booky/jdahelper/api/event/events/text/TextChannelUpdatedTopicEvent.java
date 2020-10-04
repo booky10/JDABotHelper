@@ -8,8 +8,8 @@ public class TextChannelUpdatedTopicEvent extends TextChannelUpdatedEvent<String
 
     public static final String IDENTIFIER = "topic";
 
-    public TextChannelUpdatedTopicEvent(JDA jda, Long response, TextChannel channel, String previous, String next, String identifier) {
-        super(jda, response, channel, previous, channel.getTopic(), IDENTIFIER);
+    public TextChannelUpdatedTopicEvent(JDA jda, Long response, TextChannel channel, String oldTopic) {
+        super(jda, response, channel, oldTopic, channel.getTopic(), IDENTIFIER);
     }
 
     public String getOldTopic() {

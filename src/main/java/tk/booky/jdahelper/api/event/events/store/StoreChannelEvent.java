@@ -11,10 +11,19 @@ public class StoreChannelEvent extends Event {
 
     public StoreChannelEvent(JDA jda, Long response, StoreChannel channel) {
         super(jda, response);
+
         this.channel = channel;
     }
 
     public StoreChannel getChannel() {
         return channel;
+    }
+
+    public String getID(){
+        return Long.toUnsignedString(getIDLong());
+    }
+
+    public Long getIDLong(){
+        return getChannel().getIdLong();
     }
 }

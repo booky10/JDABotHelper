@@ -11,6 +11,7 @@ public class GatewayEvent extends Event {
 
     public GatewayEvent(JDA jda, Long response, DataObject data) {
         super(jda, response);
+
         this.data = data;
     }
 

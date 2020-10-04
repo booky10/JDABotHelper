@@ -12,6 +12,7 @@ public class TextChannelEvent extends Event {
 
     public TextChannelEvent(JDA jda, Long response, TextChannel channel) {
         super(jda, response);
+
         this.channel = channel;
     }
 
@@ -20,6 +21,22 @@ public class TextChannelEvent extends Event {
     }
 
     public Guild getGuild() {
-        return channel.getGuild();
+        return getChannel().getGuild();
+    }
+
+    public String getChannelID() {
+        return Long.toUnsignedString(getChannelIDLong());
+    }
+
+    public Long getChannelIDLong() {
+        return getChannel().getIdLong();
+    }
+
+    public String getGuildID() {
+        return Long.toUnsignedString(getGuildIDLong());
+    }
+
+    public Long getGuildIDLong() {
+        return getGuild().getIdLong();
     }
 }
