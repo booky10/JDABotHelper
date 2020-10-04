@@ -1,7 +1,12 @@
 package tk.booky.jdahelper.api.event.events.voice;
 // Created by booky10 in JDABotHelper (20:12 30.09.20)
 
-public class VoiceChannelCreatedEvent {
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.VoiceChannel;
 
+public class VoiceChannelCreatedEvent extends VoiceChannelEvent{
 
+    public VoiceChannelCreatedEvent(JDA jda, Long response, VoiceChannel channel) {
+        super(jda, response, channel);
+    }
 }
