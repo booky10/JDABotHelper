@@ -4,7 +4,6 @@ package tk.booky.jdahelper.api.event.events.user;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.User;
 import tk.booky.jdahelper.api.activities.Activity;
 
 import java.util.List;
@@ -15,8 +14,8 @@ public class UserActivityUpdatedOrderEvent extends UserUpdatedEvent<List<Activit
 
     protected final Member member;
 
-    public UserActivityUpdatedOrderEvent(JDA jda, Long response, User user, List<Activity> oldActivities, Member member) {
-        super(jda, response, user, oldActivities, Activity.fromJDA(member.getActivities()), IDENTIFIER);
+    public UserActivityUpdatedOrderEvent(JDA jda, Long response, List<Activity> oldActivities, Member member) {
+        super(jda, response, member.getUser(), oldActivities, Activity.fromJDA(member.getActivities()), IDENTIFIER);
 
         this.member = member;
     }

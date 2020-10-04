@@ -15,7 +15,15 @@ public class GatewayEvent extends Event {
         this.data = data;
     }
 
-    public DataObject getData() {
+    public DataObject getPackage() {
         return data;
+    }
+
+    public DataObject getPayload() {
+        return data.getObject("d");
+    }
+
+    public String getType() {
+        return data.getString("t");
     }
 }

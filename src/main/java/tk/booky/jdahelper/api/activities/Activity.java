@@ -2,7 +2,7 @@ package tk.booky.jdahelper.api.activities;
 // Created by booky10 in JDABotHelper (18:55 27.09.20)
 
 import net.dv8tion.jda.api.sharding.ShardManager;
-import tk.booky.jdahelper.internal.manager.Helper;
+import tk.booky.jdahelper.internal.Helper;
 
 import java.util.ArrayList;
 import java.util.List;

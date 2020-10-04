@@ -4,7 +4,7 @@ package tk.booky.jdahelper.api.event.events.role;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Role;
 
-public class RoleDeletedEvent extends RoleEvent{
+public class RoleDeletedEvent extends RoleEvent {
 
     public RoleDeletedEvent(JDA jda, Long response, Role deletedRole) {
         super(jda, response, deletedRole);

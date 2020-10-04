@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.GuildChannel;
 import net.dv8tion.jda.api.entities.PermissionOverride;
 
-public class PermissionOverrideCreatedEvent extends PermissionOverrideEvent{
+public class PermissionOverrideCreatedEvent extends PermissionOverrideEvent {
 
     public PermissionOverrideCreatedEvent(JDA jda, Long response, GuildChannel channel, PermissionOverride createdOverride) {
         super(jda, response, channel, createdOverride);

@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import tk.booky.jdahelper.api.exceptions.JDAAlreadyStartedException;
 import tk.booky.jdahelper.api.exceptions.JDALoginException;
 import tk.booky.jdahelper.api.exceptions.JDANotStartedException;
-import tk.booky.jdahelper.internal.manager.Helper;
+import tk.booky.jdahelper.internal.Helper;
 
 import javax.security.auth.login.LoginException;
 import java.util.Arrays;

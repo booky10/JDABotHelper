@@ -4,7 +4,7 @@ package tk.booky.jdahelper.api.event.events.message;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.MessageChannel;
 
-public class ReactionRemoveAllEvent extends MessageEvent{
+public class ReactionRemoveAllEvent extends MessageEvent {
 
     public ReactionRemoveAllEvent(JDA api, Long responseNumber, Long messageID, MessageChannel channel) {
         super(api, responseNumber, messageID, channel);

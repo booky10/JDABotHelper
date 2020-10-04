@@ -4,7 +4,7 @@ package tk.booky.jdahelper.api.event.events.store;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.StoreChannel;
 
-public class StoreChannelCreatedEvent extends StoreChannelEvent{
+public class StoreChannelCreatedEvent extends StoreChannelEvent {
 
     public StoreChannelCreatedEvent(JDA jda, Long response, StoreChannel createdChannel) {
         super(jda, response, createdChannel);

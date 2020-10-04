@@ -11,10 +11,10 @@ public class StatusEvent extends Event implements IUpdatedEvent<JDA, JDA.Status>
 
     protected final JDA.Status newStatus, oldStatus;
 
-    public StatusEvent(JDA api, JDA.Status newStatus, JDA.Status oldStatus) {
+    public StatusEvent(JDA api, JDA.Status oldStatus) {
         super(api);
 
-        this.newStatus = newStatus;
+        this.newStatus = api.getStatus();
         this.oldStatus = oldStatus;
     }
 

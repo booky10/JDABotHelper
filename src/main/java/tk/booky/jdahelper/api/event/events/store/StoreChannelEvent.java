@@ -19,11 +19,11 @@ public class StoreChannelEvent extends Event {
         return channel;
     }
 
-    public String getID(){
+    public String getID() {
         return Long.toUnsignedString(getIDLong());
     }
 
-    public Long getIDLong(){
+    public Long getIDLong() {
         return getChannel().getIdLong();
     }
 }

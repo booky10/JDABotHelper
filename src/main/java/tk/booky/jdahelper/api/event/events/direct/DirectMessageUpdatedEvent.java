@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.User;
 
-public class DirectMessageUpdatedEvent extends DirectMessageEvent{
+public class DirectMessageUpdatedEvent extends DirectMessageEvent {
 
     private final Message message;
 
@@ -20,7 +20,7 @@ public class DirectMessageUpdatedEvent extends DirectMessageEvent{
         return message;
     }
 
-    public User getAuthor(){
+    public User getAuthor() {
         return message.getAuthor();
     }
 }

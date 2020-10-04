@@ -4,7 +4,7 @@ package tk.booky.jdahelper.api.event.events.text;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.TextChannel;
 
-public class TextChannelDeletedEvent extends TextChannelEvent{
+public class TextChannelDeletedEvent extends TextChannelEvent {
 
     public TextChannelDeletedEvent(JDA jda, Long response, TextChannel deletedChannel) {
         super(jda, response, deletedChannel);

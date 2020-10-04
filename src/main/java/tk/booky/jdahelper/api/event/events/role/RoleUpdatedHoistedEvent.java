@@ -16,7 +16,7 @@ public class RoleUpdatedHoistedEvent extends RoleUpdatedEvent<Boolean> {
         return getOldValue();
     }
 
-    public Boolean isHoisted(){
+    public Boolean isHoisted() {
         return getNewValue();
     }
 }

@@ -17,7 +17,7 @@ public class RoleUpdatedMentionable extends RoleUpdatedEvent<Boolean> {
         return getOldValue();
     }
 
-    public Boolean isMentionable(){
+    public Boolean isMentionable() {
         return getNewValue();
     }
 }

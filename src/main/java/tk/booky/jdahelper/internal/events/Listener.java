@@ -65,8 +65,21 @@ import net.dv8tion.jda.api.events.user.UserTypingEvent;
 import net.dv8tion.jda.api.events.user.update.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import tk.booky.jdahelper.api.activities.Activity;
 import tk.booky.jdahelper.api.event.api.Event;
+import tk.booky.jdahelper.api.event.events.connection.*;
+import tk.booky.jdahelper.api.event.events.direct.*;
+import tk.booky.jdahelper.api.event.events.gateway.GatewayEvent;
+import tk.booky.jdahelper.api.event.events.gateway.GatewayPingedEvent;
+import tk.booky.jdahelper.api.event.events.other.ErrorEvent;
+import tk.booky.jdahelper.api.event.events.other.StatusEvent;
 import tk.booky.jdahelper.api.event.events.other.UpdatedEvent;
+import tk.booky.jdahelper.api.event.events.self.SelfUpdatedAvatarEvent;
+import tk.booky.jdahelper.api.event.events.self.SelfUpdatedMFAEvent;
+import tk.booky.jdahelper.api.event.events.self.SelfUpdatedNameEvent;
+import tk.booky.jdahelper.api.event.events.self.SelfUpdatedVerifiedEvent;
+import tk.booky.jdahelper.api.event.events.user.*;
+import tk.booky.jdahelper.api.status.Status;
 
 public final class Listener extends ListenerAdapter {
 
@@ -82,112 +95,112 @@ public final class Listener extends ListenerAdapter {
 
     @Override
     public void onRawGateway(@NotNull RawGatewayEvent event) {
-        super.onRawGateway(event);
+        new GatewayEvent(event.getJDA(), event.getResponseNumber(), event.getPackage()).call();
     }
 
     @Override
     public void onGatewayPing(@NotNull GatewayPingEvent event) {
-        super.onGatewayPing(event);
+        new GatewayPingedEvent(event.getJDA(), event.getOldPing()).call();
     }
 
     @Override
     public void onReady(@NotNull ReadyEvent event) {
-        super.onReady(event);
+        new ConnectionStartedEvent(event.getJDA(), event.getResponseNumber()).call();
     }
 
     @Override
     public void onResume(@NotNull ResumedEvent event) {
-        super.onResume(event);
+        new ConnectionResumedEvent(event.getJDA(), event.getResponseNumber()).call();
     }
 
     @Override
     public void onReconnect(@NotNull ReconnectedEvent event) {
-        super.onReconnect(event);
+        new ConnectionReconnectedEvent(event.getJDA(), event.getResponseNumber()).call();
     }
 
     @Override
     public void onDisconnect(@NotNull DisconnectEvent event) {
-        super.onDisconnect(event);
+        new ConnectionDisconnectedEvent(event.getJDA(), event.getServiceCloseFrame(), event.getClientCloseFrame(), event.isClosedByServer(), event.getTimeDisconnected()).call();
     }
 
     @Override
     public void onShutdown(@NotNull ShutdownEvent event) {
-        super.onShutdown(event);
+        new ConnectionShutdownEvent(event.getJDA(), event.getTimeShutdown(), event.getCode()).call();
     }
 
     @Override
     public void onStatusChange(@NotNull StatusChangeEvent event) {
-        super.onStatusChange(event);
+        new StatusEvent(event.getEntity(), event.getOldStatus()).call();
     }
 
     @Override
     public void onException(@NotNull ExceptionEvent event) {
-        super.onException(event);
+        new ErrorEvent(event.getJDA(), event.getCause(), event.isLogged()).call();
     }
 
     @Override
     public void onUserUpdateName(@NotNull UserUpdateNameEvent event) {
-        super.onUserUpdateName(event);
+        new UserUpdatedNameEvent(event.getJDA(), event.getResponseNumber(), event.getUser(), event.getOldName()).call();
     }
 
     @Override
     public void onUserUpdateDiscriminator(@NotNull UserUpdateDiscriminatorEvent event) {
-        super.onUserUpdateDiscriminator(event);
+        new UserUpdatedTagEvent(event.getJDA(), event.getResponseNumber(), event.getUser(), event.getOldDiscriminator()).call();
     }
 
     @Override
     public void onUserUpdateAvatar(@NotNull UserUpdateAvatarEvent event) {
-        super.onUserUpdateAvatar(event);
+        new UserUpdatedAvatarEvent(event.getJDA(), event.getResponseNumber(), event.getUser(), event.getOldAvatarId()).call();
     }
 
     @Override
     public void onUserUpdateOnlineStatus(@NotNull UserUpdateOnlineStatusEvent event) {
-        super.onUserUpdateOnlineStatus(event);
+        new UserActivityStatusChangedEvent(event.getJDA(), event.getResponseNumber(), event.getMember(), Status.fromJDA(event.getOldOnlineStatus())).call();
     }
 
     @Override
     public void onUserUpdateActivityOrder(@NotNull UserUpdateActivityOrderEvent event) {
-        super.onUserUpdateActivityOrder(event);
+        new UserActivityUpdatedOrderEvent(event.getJDA(), event.getResponseNumber(), Activity.fromJDA(event.getOldValue()), event.getMember()).call();
     }
 
     @Override
     public void onUserUpdateFlags(@NotNull UserUpdateFlagsEvent event) {
-        super.onUserUpdateFlags(event);
+        new UserUpdatedFlagsEvent(event.getJDA(), event.getResponseNumber(), event.getUser(), event.getOldFlags()).call();
     }
 
     @Override
     public void onUserTyping(@NotNull UserTypingEvent event) {
-        super.onUserTyping(event);
+        new UserCaughtTypingEvent(event.getJDA(), event.getResponseNumber(), event.getUser(), event.getChannel(), event.getTimestamp()).call();
     }
 
     @Override
     public void onUserActivityStart(@NotNull UserActivityStartEvent event) {
-        super.onUserActivityStart(event);
+        new UserActivityStartedEvent(event.getJDA(), event.getResponseNumber(), event.getMember(), Activity.fromJDA(event.getNewActivity())).call();
     }
 
     @Override
     public void onUserActivityEnd(@NotNull UserActivityEndEvent event) {
-        super.onUserActivityEnd(event);
+        new UserActivityEndedEvent(event.getJDA(), event.getResponseNumber(), event.getMember(), Activity.fromJDA(event.getOldActivity())).call();
     }
 
     @Override
     public void onSelfUpdateAvatar(@NotNull SelfUpdateAvatarEvent event) {
-        super.onSelfUpdateAvatar(event);
+        new SelfUpdatedAvatarEvent(event.getJDA(), event.getResponseNumber(), event.getOldAvatarId()).call();
     }
 
     @Override
     public void onSelfUpdateMFA(@NotNull SelfUpdateMFAEvent event) {
-        super.onSelfUpdateMFA(event);
+        new SelfUpdatedMFAEvent(event.getJDA(), event.getResponseNumber(), event.wasMfaEnabled()).call();
     }
 
     @Override
     public void onSelfUpdateName(@NotNull SelfUpdateNameEvent event) {
-        super.onSelfUpdateName(event);
+        new SelfUpdatedNameEvent(event.getJDA(), event.getResponseNumber(), event.getOldName()).call();
     }
 
     @Override
     public void onSelfUpdateVerified(@NotNull SelfUpdateVerifiedEvent event) {
-        super.onSelfUpdateVerified(event);
+        new SelfUpdatedVerifiedEvent(event.getJDA(), event.getResponseNumber(), event.wasVerified()).call();
     }
 
     @Override
@@ -197,6 +210,7 @@ public final class Listener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageUpdate(@NotNull GuildMessageUpdateEvent event) {
+        //TODO: IMPLEMENT THIS
         super.onGuildMessageUpdate(event);
     }
 
@@ -232,31 +246,32 @@ public final class Listener extends ListenerAdapter {
 
     @Override
     public void onPrivateMessageReceived(@NotNull PrivateMessageReceivedEvent event) {
-        super.onPrivateMessageReceived(event);
+        new DirectMessageReceiveEvent(event.getJDA(), event.getResponseNumber(), event.getMessageIdLong(), event.getChannel(), event.getMessage()).call();
     }
 
     @Override
     public void onPrivateMessageUpdate(@NotNull PrivateMessageUpdateEvent event) {
-        super.onPrivateMessageUpdate(event);
+        new DirectMessageUpdatedEvent(event.getJDA(), event.getResponseNumber(), event.getMessageIdLong(), event.getChannel(), event.getMessage()).call();
     }
 
     @Override
     public void onPrivateMessageDelete(@NotNull PrivateMessageDeleteEvent event) {
-        super.onPrivateMessageDelete(event);
+        new DirectMessageDeletedEvent(event.getJDA(), event.getResponseNumber(), event.getMessageIdLong(), event.getChannel()).call();
     }
 
     @Override
     public void onPrivateMessageEmbed(@NotNull PrivateMessageEmbedEvent event) {
-        super.onPrivateMessageEmbed(event);
+        new DirectEmbedReceiveEvent(event.getJDA(), event.getResponseNumber(), event.getMessageIdLong(), event.getChannel(), event.getMessageEmbeds()).call();
     }
 
     @Override
     public void onPrivateMessageReactionAdd(@NotNull PrivateMessageReactionAddEvent event) {
-        super.onPrivateMessageReactionAdd(event);
+        new DirectReactionAddEvent(event.getJDA(), event.getResponseNumber(), event.getUserIdLong(), event.getReaction()).call();
     }
 
     @Override
     public void onPrivateMessageReactionRemove(@NotNull PrivateMessageReactionRemoveEvent event) {
+        //TODO: MAKE MORE
         super.onPrivateMessageReactionRemove(event);
     }
 
