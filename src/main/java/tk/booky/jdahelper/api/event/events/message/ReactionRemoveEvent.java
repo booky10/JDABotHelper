@@ -4,11 +4,10 @@ package tk.booky.jdahelper.api.event.events.message;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageReaction;
-import net.dv8tion.jda.api.entities.User;
 
 public class ReactionRemoveEvent extends ReactionEvent {
 
-    public ReactionRemoveEvent(JDA api, Long responseNumber, User user, Member member, MessageReaction removedReaction, Long userID) {
-        super(api, responseNumber, user, member, removedReaction, userID);
+    public ReactionRemoveEvent(JDA api, Long responseNumber, Member member, MessageReaction removedReaction) {
+        super(api, responseNumber, member.getUser(), member, removedReaction, member.getIdLong());
     }
 }

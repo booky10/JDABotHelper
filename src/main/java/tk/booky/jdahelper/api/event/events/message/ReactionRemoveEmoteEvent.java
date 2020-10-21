@@ -9,8 +9,8 @@ public class ReactionRemoveEmoteEvent extends MessageEvent {
 
     private final MessageReaction removedReaction;
 
-    public ReactionRemoveEmoteEvent(JDA api, Long responseNumber, Long messageID, MessageChannel channel, MessageReaction removedReaction) {
-        super(api, responseNumber, messageID, channel);
+    public ReactionRemoveEmoteEvent(JDA api, Long responseNumber,  MessageChannel channel, MessageReaction removedReaction) {
+        super(api, responseNumber, removedReaction.getMessageIdLong(), channel);
 
         this.removedReaction = removedReaction;
     }

@@ -4,11 +4,10 @@ package tk.booky.jdahelper.api.event.events.message;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageReaction;
-import net.dv8tion.jda.api.entities.User;
 
 public class ReactionAddEvent extends ReactionEvent {
 
-    public ReactionAddEvent(JDA api, Long responseNumber, User user, Member member, MessageReaction addedReaction, Long userID) {
-        super(api, responseNumber, user, member, addedReaction, userID);
+    public ReactionAddEvent(JDA api, Long responseNumber, Member member, MessageReaction addedReaction) {
+        super(api, responseNumber, member.getUser(), member, addedReaction, member.getIdLong());
     }
 }
