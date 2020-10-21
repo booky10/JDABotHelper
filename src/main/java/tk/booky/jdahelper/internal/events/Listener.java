@@ -67,18 +67,28 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import tk.booky.jdahelper.api.activities.Activity;
 import tk.booky.jdahelper.api.event.api.Event;
+import tk.booky.jdahelper.api.event.events.category.*;
 import tk.booky.jdahelper.api.event.events.connection.*;
 import tk.booky.jdahelper.api.event.events.direct.*;
+import tk.booky.jdahelper.api.event.events.emote.*;
 import tk.booky.jdahelper.api.event.events.gateway.GatewayEvent;
 import tk.booky.jdahelper.api.event.events.gateway.GatewayPingedEvent;
+import tk.booky.jdahelper.api.event.events.guild.GuildEvent;
+import tk.booky.jdahelper.api.event.events.message.*;
 import tk.booky.jdahelper.api.event.events.other.ErrorEvent;
+import tk.booky.jdahelper.api.event.events.other.HTTPRequestEvent;
 import tk.booky.jdahelper.api.event.events.other.StatusEvent;
 import tk.booky.jdahelper.api.event.events.other.UpdatedEvent;
-import tk.booky.jdahelper.api.event.events.self.SelfUpdatedAvatarEvent;
-import tk.booky.jdahelper.api.event.events.self.SelfUpdatedMFAEvent;
-import tk.booky.jdahelper.api.event.events.self.SelfUpdatedNameEvent;
-import tk.booky.jdahelper.api.event.events.self.SelfUpdatedVerifiedEvent;
+import tk.booky.jdahelper.api.event.events.permission.PermissionOverrideCreatedEvent;
+import tk.booky.jdahelper.api.event.events.permission.PermissionOverrideDeletedEvent;
+import tk.booky.jdahelper.api.event.events.permission.PermissionOverrideEvent;
+import tk.booky.jdahelper.api.event.events.permission.PermissionOverrideUpdatedEvent;
+import tk.booky.jdahelper.api.event.events.role.*;
+import tk.booky.jdahelper.api.event.events.self.*;
+import tk.booky.jdahelper.api.event.events.store.*;
+import tk.booky.jdahelper.api.event.events.text.*;
 import tk.booky.jdahelper.api.event.events.user.*;
+import tk.booky.jdahelper.api.event.events.voice.*;
 import tk.booky.jdahelper.api.status.Status;
 
 public final class Listener extends ListenerAdapter {
@@ -271,198 +281,197 @@ public final class Listener extends ListenerAdapter {
 
     @Override
     public void onPrivateMessageReactionRemove(@NotNull PrivateMessageReactionRemoveEvent event) {
-        //TODO: MAKE MORE
-        super.onPrivateMessageReactionRemove(event);
+        new DirectReactionRemoveEvent(event.getJDA(), event.getResponseNumber(), event.getUserIdLong(), event.getReaction()).call();
     }
 
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
-        super.onMessageReceived(event);
+        new MessageReceiveEvent(event.getJDA(), event.getResponseNumber(), event.getMessage()).call();
     }
 
     @Override
     public void onMessageUpdate(@NotNull MessageUpdateEvent event) {
-        super.onMessageUpdate(event);
+        new MessageUpdatedEvent(event.getJDA(), event.getResponseNumber(), event.getMessage()).call();
     }
 
     @Override
     public void onMessageDelete(@NotNull MessageDeleteEvent event) {
-        super.onMessageDelete(event);
+        new MessageDeletedEvent(event.getJDA(), event.getResponseNumber(), event.getMessageIdLong(), event.getChannel()).call();
     }
 
     @Override
     public void onMessageBulkDelete(@NotNull MessageBulkDeleteEvent event) {
-        super.onMessageBulkDelete(event);
+        new MessagesPurgedEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getMessageIds()).call();
     }
 
     @Override
     public void onMessageEmbed(@NotNull MessageEmbedEvent event) {
-        super.onMessageEmbed(event);
+        new EmbedReceiveEvent(event.getJDA(), event.getResponseNumber(), event.getMessageIdLong(), event.getChannel(), event.getMessageEmbeds()).call();
     }
 
     @Override
     public void onMessageReactionAdd(@NotNull MessageReactionAddEvent event) {
-        super.onMessageReactionAdd(event);
+        new ReactionAddEvent(event.getJDA(), event.getResponseNumber(), event.getMember(), event.getReaction()).call();
     }
 
     @Override
     public void onMessageReactionRemove(@NotNull MessageReactionRemoveEvent event) {
-        super.onMessageReactionRemove(event);
+        new ReactionRemoveEvent(event.getJDA(), event.getResponseNumber(), event.getMember(), event.getReaction()).call();
     }
 
     @Override
     public void onMessageReactionRemoveAll(@NotNull MessageReactionRemoveAllEvent event) {
-        super.onMessageReactionRemoveAll(event);
+        new ReactionRemoveAllEvent(event.getJDA(), event.getResponseNumber(), event.getMessageIdLong(), event.getChannel()).call();
     }
 
     @Override
     public void onMessageReactionRemoveEmote(@NotNull MessageReactionRemoveEmoteEvent event) {
-        super.onMessageReactionRemoveEmote(event);
+        new ReactionRemoveEmoteEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getReaction()).call();
     }
 
     @Override
     public void onPermissionOverrideDelete(@NotNull PermissionOverrideDeleteEvent event) {
-        super.onPermissionOverrideDelete(event);
+        new PermissionOverrideDeletedEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getPermissionOverride()).call();
     }
 
     @Override
     public void onPermissionOverrideUpdate(@NotNull PermissionOverrideUpdateEvent event) {
-        super.onPermissionOverrideUpdate(event);
+        new PermissionOverrideUpdatedEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getPermissionOverride(), event.getOldAllowRaw(), event.getOldDenyRaw()).call();
     }
 
     @Override
     public void onPermissionOverrideCreate(@NotNull PermissionOverrideCreateEvent event) {
-        super.onPermissionOverrideCreate(event);
+        new PermissionOverrideCreatedEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getPermissionOverride()).call();
     }
 
     @Override
     public void onStoreChannelDelete(@NotNull StoreChannelDeleteEvent event) {
-        super.onStoreChannelDelete(event);
+        new StoreChannelDeletedEvent(event.getJDA(), event.getResponseNumber(), event.getChannel()).call();
     }
 
     @Override
     public void onStoreChannelUpdateName(@NotNull StoreChannelUpdateNameEvent event) {
-        super.onStoreChannelUpdateName(event);
+        new StoreChannelUpdatedNameEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldName()).call();
     }
 
     @Override
     public void onStoreChannelUpdatePosition(@NotNull StoreChannelUpdatePositionEvent event) {
-        super.onStoreChannelUpdatePosition(event);
+        new StoreChannelUpdatedPositionEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldPosition()).call();
     }
 
     @Override
     public void onStoreChannelCreate(@NotNull StoreChannelCreateEvent event) {
-        super.onStoreChannelCreate(event);
+        new StoreChannelCreatedEvent(event.getJDA(), event.getResponseNumber(), event.getChannel()).call();
     }
 
     @Override
     public void onTextChannelDelete(@NotNull TextChannelDeleteEvent event) {
-        super.onTextChannelDelete(event);
+        new TextChannelDeletedEvent(event.getJDA(), event.getResponseNumber(), event.getChannel()).call();
     }
 
     @Override
     public void onTextChannelUpdateName(@NotNull TextChannelUpdateNameEvent event) {
-        super.onTextChannelUpdateName(event);
+        new TextChannelUpdatedNameEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldName()).call();
     }
 
     @Override
     public void onTextChannelUpdateTopic(@NotNull TextChannelUpdateTopicEvent event) {
-        super.onTextChannelUpdateTopic(event);
+        new TextChannelUpdatedTopicEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldTopic()).call();
     }
 
     @Override
     public void onTextChannelUpdatePosition(@NotNull TextChannelUpdatePositionEvent event) {
-        super.onTextChannelUpdatePosition(event);
+        new TextChannelUpdatedPositionEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldPosition()).call();
     }
 
     @Override
     public void onTextChannelUpdateNSFW(@NotNull TextChannelUpdateNSFWEvent event) {
-        super.onTextChannelUpdateNSFW(event);
+        new TextChannelUpdatedNSFWEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldNSFW()).call();
     }
 
     @Override
     public void onTextChannelUpdateParent(@NotNull TextChannelUpdateParentEvent event) {
-        super.onTextChannelUpdateParent(event);
+        new TextChannelUpdatedParentEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldParent()).call();
     }
 
     @Override
     public void onTextChannelUpdateSlowmode(@NotNull TextChannelUpdateSlowmodeEvent event) {
-        super.onTextChannelUpdateSlowmode(event);
+        new TextChannelUpdatedSlowModeEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldSlowmode()).call();
     }
 
     @Override
     public void onTextChannelUpdateNews(@NotNull TextChannelUpdateNewsEvent event) {
-        super.onTextChannelUpdateNews(event);
+        new TextChannelUpdatedNewsEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldValue()).call();
     }
 
     @Override
     public void onTextChannelCreate(@NotNull TextChannelCreateEvent event) {
-        super.onTextChannelCreate(event);
+        new TextChannelCreatedEvent(event.getJDA(), event.getResponseNumber(), event.getChannel()).call();
     }
 
     @Override
     public void onVoiceChannelDelete(@NotNull VoiceChannelDeleteEvent event) {
-        super.onVoiceChannelDelete(event);
+        new VoiceChannelDeletedEvent(event.getJDA(), event.getResponseNumber(), event.getChannel()).call();
     }
 
     @Override
     public void onVoiceChannelUpdateName(@NotNull VoiceChannelUpdateNameEvent event) {
-        super.onVoiceChannelUpdateName(event);
+        new VoiceChannelUpdatedNameEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldName()).call();
     }
 
     @Override
     public void onVoiceChannelUpdatePosition(@NotNull VoiceChannelUpdatePositionEvent event) {
-        super.onVoiceChannelUpdatePosition(event);
+        new VoiceChannelUpdatedPositionEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldPosition()).call();
     }
 
     @Override
     public void onVoiceChannelUpdateUserLimit(@NotNull VoiceChannelUpdateUserLimitEvent event) {
-        super.onVoiceChannelUpdateUserLimit(event);
+        new VoiceChannelUpdatedUserLimitEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldUserLimit()).call();
     }
 
     @Override
     public void onVoiceChannelUpdateBitrate(@NotNull VoiceChannelUpdateBitrateEvent event) {
-        super.onVoiceChannelUpdateBitrate(event);
+        new VoiceChannelUpdatedBitrateEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldBitrate()).call();
     }
 
     @Override
     public void onVoiceChannelUpdateParent(@NotNull VoiceChannelUpdateParentEvent event) {
-        super.onVoiceChannelUpdateParent(event);
+        new VoiceChannelUpdatedParentEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldParent()).call();
     }
 
     @Override
     public void onVoiceChannelCreate(@NotNull VoiceChannelCreateEvent event) {
-        super.onVoiceChannelCreate(event);
+        new VoiceChannelCreatedEvent(event.getJDA(), event.getResponseNumber(), event.getChannel()).call();
     }
 
     @Override
     public void onCategoryDelete(@NotNull CategoryDeleteEvent event) {
-        super.onCategoryDelete(event);
+        new CategoryDeletedEvent(event.getJDA(), event.getResponseNumber(), event.getCategory()).call();
     }
 
     @Override
     public void onCategoryUpdateName(@NotNull CategoryUpdateNameEvent event) {
-        super.onCategoryUpdateName(event);
+        new CategoryUpdatedNameEvent(event.getJDA(), event.getResponseNumber(), event.getCategory(), event.getOldName()).call();
     }
 
     @Override
     public void onCategoryUpdatePosition(@NotNull CategoryUpdatePositionEvent event) {
-        super.onCategoryUpdatePosition(event);
+        new CategoryUpdatedPositionEvent(event.getJDA(), event.getResponseNumber(), event.getCategory(), event.getOldPosition()).call();
     }
 
     @Override
     public void onCategoryCreate(@NotNull CategoryCreateEvent event) {
-        super.onCategoryCreate(event);
+        new CategoryCreatedEvent(event.getJDA(), event.getResponseNumber(), event.getCategory()).call();
     }
 
     @Override
     public void onPrivateChannelCreate(@NotNull PrivateChannelCreateEvent event) {
-        super.onPrivateChannelCreate(event);
+        new DirectChannelCreatedEvent(event.getJDA(), event.getChannel()).call();
     }
 
     @Override
     public void onPrivateChannelDelete(@NotNull PrivateChannelDeleteEvent event) {
-        super.onPrivateChannelDelete(event);
+        new DirectChannelDeletedEvent(event.getJDA(), event.getResponseNumber(), event.getChannel()).call();
     }
 
     @Override
@@ -717,77 +726,77 @@ public final class Listener extends ListenerAdapter {
 
     @Override
     public void onRoleCreate(@NotNull RoleCreateEvent event) {
-        super.onRoleCreate(event);
+        new RoleCreatedEvent(event.getJDA(), event.getResponseNumber(), event.getRole()).call();
     }
 
     @Override
     public void onRoleDelete(@NotNull RoleDeleteEvent event) {
-        super.onRoleDelete(event);
+        new RoleDeletedEvent(event.getJDA(), event.getResponseNumber(), event.getRole()).call();
     }
 
     @Override
     public void onRoleUpdateColor(@NotNull RoleUpdateColorEvent event) {
-        super.onRoleUpdateColor(event);
+        new RoleUpdatedColorEvent(event.getJDA(), event.getResponseNumber(), event.getRole(), event.getOldColorRaw()).call();
     }
 
     @Override
     public void onRoleUpdateHoisted(@NotNull RoleUpdateHoistedEvent event) {
-        super.onRoleUpdateHoisted(event);
+        new RoleUpdatedHoistedEvent(event.getJDA(), event.getResponseNumber(), event.getRole(), event.wasHoisted()).call();
     }
 
     @Override
     public void onRoleUpdateMentionable(@NotNull RoleUpdateMentionableEvent event) {
-        super.onRoleUpdateMentionable(event);
+        new RoleUpdatedMentionable(event.getJDA(), event.getResponseNumber(), event.getRole(), event.wasMentionable()).call();
     }
 
     @Override
     public void onRoleUpdateName(@NotNull RoleUpdateNameEvent event) {
-        super.onRoleUpdateName(event);
+        new RoleUpdatedNameEvent(event.getJDA(), event.getResponseNumber(), event.getRole(), event.getOldName()).call();
     }
 
     @Override
     public void onRoleUpdatePermissions(@NotNull RoleUpdatePermissionsEvent event) {
-        super.onRoleUpdatePermissions(event);
+        new RoleUpdatedPermissionsEvent(event.getJDA(), event.getResponseNumber(), event.getRole(), event.getOldPermissionsRaw()).call();
     }
 
     @Override
     public void onRoleUpdatePosition(@NotNull RoleUpdatePositionEvent event) {
-        super.onRoleUpdatePosition(event);
+        new RoleUpdatedPositionEvent(event.getJDA(), event.getResponseNumber(), event.getRole(), event.getOldPositionRaw()).call();
     }
 
     @Override
     public void onEmoteAdded(@NotNull EmoteAddedEvent event) {
-        super.onEmoteAdded(event);
+        new EmoteAddEvent(event.getJDA(), event.getResponseNumber(), event.getEmote()).call();
     }
 
     @Override
     public void onEmoteRemoved(@NotNull EmoteRemovedEvent event) {
-        super.onEmoteRemoved(event);
+        new EmoteRemoveEvent(event.getJDA(), event.getResponseNumber(), event.getEmote()).call();
     }
 
     @Override
     public void onEmoteUpdateName(@NotNull EmoteUpdateNameEvent event) {
-        super.onEmoteUpdateName(event);
+        new EmoteUpdatedNameEvent(event.getJDA(), event.getResponseNumber(), event.getEmote(), event.getOldName()).call();
     }
 
     @Override
     public void onEmoteUpdateRoles(@NotNull EmoteUpdateRolesEvent event) {
-        super.onEmoteUpdateRoles(event);
+        new EmoteUpdatedRolesEvent(event.getJDA(), event.getResponseNumber(), event.getEmote(), event.getOldRoles()).call();
     }
 
     @Override
     public void onHttpRequest(@NotNull HttpRequestEvent event) {
-        super.onHttpRequest(event);
+        new HTTPRequestEvent(event.getRequest(), event.getResponse()).call();
     }
 
     @Override
     public void onGenericMessage(@NotNull GenericMessageEvent event) {
-        super.onGenericMessage(event);
+        new MessageEvent(event.getJDA(), event.getResponseNumber(), event.getMessageIdLong(), event.getChannel()).call();
     }
 
     @Override
     public void onGenericMessageReaction(@NotNull GenericMessageReactionEvent event) {
-        super.onGenericMessageReaction(event);
+        new ReactionEvent(event.getJDA(), event.getResponseNumber(), event.getUser(), event.getMember(), event.getReaction(), event.getUserIdLong()).call();
     }
 
     @Override
@@ -802,72 +811,72 @@ public final class Listener extends ListenerAdapter {
 
     @Override
     public void onGenericPrivateMessage(@NotNull GenericPrivateMessageEvent event) {
-        super.onGenericPrivateMessage(event);
+        new DirectMessageEvent(event.getJDA(), event.getResponseNumber(), event.getMessageIdLong(), event.getChannel()).call();
     }
 
     @Override
     public void onGenericPrivateMessageReaction(@NotNull GenericPrivateMessageReactionEvent event) {
-        super.onGenericPrivateMessageReaction(event);
+        new DirectReactionEvent(event.getJDA(), event.getResponseNumber(), event.getUserIdLong(), event.getReaction()).call();
     }
 
     @Override
     public void onGenericUser(@NotNull GenericUserEvent event) {
-        super.onGenericUser(event);
+        new UserEvent(event.getJDA(), event.getResponseNumber(), event.getUser()).call();
     }
 
     @Override
     public void onGenericUserPresence(@NotNull GenericUserPresenceEvent event) {
-        super.onGenericUserPresence(event);
+        new UserActivityEvent(event.getJDA(), event.getResponseNumber(), event.getGuild(), event.getMember()).call();
     }
 
     @Override
     public void onGenericSelfUpdate(@NotNull GenericSelfUpdateEvent event) {
-        super.onGenericSelfUpdate(event);
+        new SelfUpdatedEvent<>(event.getJDA(), event.getResponseNumber(), event.getOldValue(), event.getNewValue(), event.getPropertyIdentifier()).call();
     }
 
     @Override
     public void onGenericStoreChannel(@NotNull GenericStoreChannelEvent event) {
-        super.onGenericStoreChannel(event);
+        new StoreChannelEvent(event.getJDA(), event.getResponseNumber(), event.getChannel()).call();
     }
 
     @Override
     public void onGenericStoreChannelUpdate(@NotNull GenericStoreChannelUpdateEvent event) {
-        super.onGenericStoreChannelUpdate(event);
+        new StoreChannelUpdatedEvent<>(event.getJDA(), event.getResponseNumber(), event.getEntity(), event.getOldValue(), event.getNewValue(), event.getPropertyIdentifier()).call();
     }
 
     @Override
     public void onGenericTextChannel(@NotNull GenericTextChannelEvent event) {
-        super.onGenericTextChannel(event);
+        new TextChannelEvent(event.getJDA(), event.getResponseNumber(), event.getChannel()).call();
     }
 
     @Override
     public void onGenericTextChannelUpdate(@NotNull GenericTextChannelUpdateEvent event) {
-        super.onGenericTextChannelUpdate(event);
+        new TextChannelUpdatedEvent<>(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldValue(), event.getNewValue(), event.getPropertyIdentifier()).call();
     }
 
     @Override
     public void onGenericVoiceChannel(@NotNull GenericVoiceChannelEvent event) {
-        super.onGenericVoiceChannel(event);
+        new VoiceChannelEvent(event.getJDA(), event.getResponseNumber(), event.getChannel()).call();
     }
 
     @Override
     public void onGenericVoiceChannelUpdate(@NotNull GenericVoiceChannelUpdateEvent event) {
-        super.onGenericVoiceChannelUpdate(event);
+        new VoiceChannelUpdatedEvent<>(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getOldValue(), event.getNewValue(), event.getPropertyIdentifier()).call();
     }
 
     @Override
     public void onGenericCategory(@NotNull GenericCategoryEvent event) {
-        super.onGenericCategory(event);
+        new CategoryEvent(event.getJDA(), event.getResponseNumber(), event.getCategory()).call();
     }
 
     @Override
     public void onGenericCategoryUpdate(@NotNull GenericCategoryUpdateEvent event) {
-        super.onGenericCategoryUpdate(event);
+        new CategoryUpdatedEvent<>(event.getJDA(), event.getResponseNumber(), event.getCategory(), event.getOldValue(), event.getNewValue(), event.getPropertyIdentifier()).call();
     }
 
     @Override
     public void onGenericGuild(@NotNull GenericGuildEvent event) {
-        super.onGenericGuild(event);
+        new GuildEvent(event.getJDA(), event.getResponseNumber(), event.getGuild()).call();
     }
 
     @Override
@@ -897,26 +906,26 @@ public final class Listener extends ListenerAdapter {
 
     @Override
     public void onGenericRole(@NotNull GenericRoleEvent event) {
-        super.onGenericRole(event);
+        new RoleEvent(event.getJDA(), event.getResponseNumber(), event.getRole()).call();
     }
 
     @Override
     public void onGenericRoleUpdate(@NotNull GenericRoleUpdateEvent event) {
-        super.onGenericRoleUpdate(event);
+        new RoleUpdatedEvent<>(event.getJDA(), event.getResponseNumber(), event.getRole(), event.getOldValue(), event.getNewValue(), event.getPropertyIdentifier()).call();
     }
 
     @Override
     public void onGenericEmote(@NotNull GenericEmoteEvent event) {
-        super.onGenericEmote(event);
+        new EmoteEvent(event.getJDA(), event.getResponseNumber(), event.getEmote()).call();
     }
 
     @Override
     public void onGenericEmoteUpdate(@NotNull GenericEmoteUpdateEvent event) {
-        super.onGenericEmoteUpdate(event);
+        new EmoteUpdatedEvent<>(event.getJDA(), event.getResponseNumber(), event.getEmote(), event.getOldValue(), event.getNewValue(), event.getPropertyIdentifier()).call();
     }
 
     @Override
     public void onGenericPermissionOverride(@NotNull GenericPermissionOverrideEvent event) {
-        super.onGenericPermissionOverride(event);
+        new PermissionOverrideEvent(event.getJDA(), event.getResponseNumber(), event.getChannel(), event.getPermissionOverride()).call();
     }
 }
