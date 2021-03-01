@@ -49,7 +49,7 @@ public class CommandManager implements ICommandManager {
 
     @Override
     public void sendHelpMessage(MessageChannel channel) {
-        Helper.sendEmbed(channel, Color.RED, "**__Help__**", "There are the following Commands:")
+        Helper.sendEmbed(channel, Color.RED, "**__Help__**", "There are the following Commands:");
     }
 
     @Override
