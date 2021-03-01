@@ -1,4 +1,4 @@
-package tk.booky.jdahelper.api.event.api;
+package tk.booky.jdahelper.api.event;
 // Created by booky10 in JDABotHelper (18:41 27.09.20)
 
 public enum EventPriority {

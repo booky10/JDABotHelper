@@ -66,7 +66,7 @@ import net.dv8tion.jda.api.events.user.update.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import tk.booky.jdahelper.api.activities.Activity;
-import tk.booky.jdahelper.api.event.api.Event;
+import tk.booky.jdahelper.api.event.Event;
 import tk.booky.jdahelper.api.event.events.category.*;
 import tk.booky.jdahelper.api.event.events.connection.*;
 import tk.booky.jdahelper.api.event.events.direct.*;
