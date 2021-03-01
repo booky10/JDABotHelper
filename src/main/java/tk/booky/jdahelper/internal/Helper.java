@@ -2,9 +2,7 @@ package tk.booky.jdahelper.internal;
 // Created by booky10 in JDABotHelper (18:50 27.09.20)
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.GuildChannel;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.requests.RestAction;
 import tk.booky.jdahelper.api.activities.IActivityProvider;
 import tk.booky.jdahelper.api.commands.ICommandManager;
@@ -64,6 +62,15 @@ public class Helper {
     }
 
     @SafeVarargs
+    public static RestAction<Message> sendEmbed(MessageChannel channel, String title, String body, Pair<String, String>... fields) {
+        return sendEmbed(channel, new Color((int) (Math.random() * 0x1000000)), title, body, true, fields);
+    }
+
+    public static RestAction<Message> sendEmbed(MessageChannel channel, String title, String body, List<Pair<String, String>> fields) {
+        return sendEmbed(channel, new Color((int) (Math.random() * 0x1000000)), title, body, true, fields);
+    }
+
+    @SafeVarargs
     public static RestAction<Message> sendEmbed(MessageChannel channel, Color color, String title, String body, Pair<String, String>... fields) {
         return sendEmbed(channel, color, title, body, true, fields);
     }
@@ -85,19 +92,17 @@ public class Helper {
         builder.setColor(color.getRGB());
         builder.setTimestamp(new Date(System.currentTimeMillis()).toInstant());
 
-        for (Pair<String, String> field : fields)
-            builder.addField(field.getKey(), field.getValue(), inLine);
+        fields.forEach(field -> builder.addField(field.getKey(), field.getValue(), inLine));
 
         if (channel.getType().isGuild()) {
-            GuildChannel guildChannel = (GuildChannel) channel;
-            String iconURL = guildChannel.getGuild().getIconUrl();
-
-            if (iconURL != null)
-                builder.setFooter(guildChannel.getGuild().getName(), iconURL);
-            else
-                builder.setFooter(guildChannel.getGuild().getName());
-        } else
+            Guild guild = ((GuildChannel) channel).getGuild();
+            builder.setFooter(guild.getName(), guild.getIconUrl());
+        } else if (channel.getType().equals(ChannelType.PRIVATE)) {
+            User user = ((PrivateChannel) channel).getUser();
+            builder.setFooter(user.getAsTag(), user.getEffectiveAvatarUrl());
+        } else {
             builder.setFooter(channel.getName());
+        }
 
         return channel.sendMessage(builder.build());
     }
