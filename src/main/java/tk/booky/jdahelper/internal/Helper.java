@@ -4,17 +4,13 @@ package tk.booky.jdahelper.internal;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.requests.RestAction;
-import tk.booky.jdahelper.api.activities.IActivityProvider;
 import tk.booky.jdahelper.api.commands.ICommandManager;
-import tk.booky.jdahelper.api.event.api.AbstractEventManager;
+import tk.booky.jdahelper.api.event.AbstractEventManager;
 import tk.booky.jdahelper.api.language.ILanguageProvider;
-import tk.booky.jdahelper.api.status.IStatusProvider;
 import tk.booky.jdahelper.internal.events.EventManager;
 import tk.booky.jdahelper.internal.events.Listener;
-import tk.booky.jdahelper.internal.implementations.ActivityProvider;
 import tk.booky.jdahelper.internal.implementations.CommandManager;
 import tk.booky.jdahelper.internal.implementations.LanguageProvider;
-import tk.booky.jdahelper.internal.implementations.StatusProvider;
 import tk.booky.jdahelper.utils.Pair;
 
 import java.awt.*;
@@ -26,20 +22,8 @@ public class Helper {
 
     private static ILanguageProvider languageProvider;
     private static ICommandManager commandManager;
-    private static IActivityProvider activityProvider;
-    private static IStatusProvider statusProvider;
     private static AbstractEventManager eventManager;
     private static Listener listener;
-
-    public static IActivityProvider getActivityProvider() {
-        if (activityProvider == null) activityProvider = new ActivityProvider();
-        return activityProvider;
-    }
-
-    public static IStatusProvider getStatusProvider() {
-        if (statusProvider == null) statusProvider = new StatusProvider();
-        return statusProvider;
-    }
 
     public static Listener getListener() {
         if (listener == null) listener = new Listener();
