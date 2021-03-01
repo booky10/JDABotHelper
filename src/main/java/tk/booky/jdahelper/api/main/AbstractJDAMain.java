@@ -6,12 +6,11 @@ import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import tk.booky.jdahelper.api.exceptions.JDAAlreadyStartedException;
-import tk.booky.jdahelper.api.exceptions.JDALoginException;
-import tk.booky.jdahelper.api.exceptions.JDANotStartedException;
+import tk.booky.jdahelper.api.exceptions.AlreadyStartedException;
+import tk.booky.jdahelper.api.exceptions.LoginException;
+import tk.booky.jdahelper.api.exceptions.NotStartedException;
 import tk.booky.jdahelper.internal.Helper;
 
-import javax.security.auth.login.LoginException;
 import java.util.Arrays;
 
 public abstract class AbstractJDAMain {
@@ -19,7 +18,7 @@ public abstract class AbstractJDAMain {
     private ShardManager jda;
 
     protected final void startJDA(String token) {
-        if (jda != null) throw new JDAAlreadyStartedException("JDA is already started!");
+        if (jda != null) throw new AlreadyStartedException("JDA is already started!");
 
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.create(token, Arrays.asList(GatewayIntent.values()));
         builder.enableCache(Arrays.asList(CacheFlag.values()));
@@ -31,18 +30,18 @@ public abstract class AbstractJDAMain {
 
         try {
             jda = builder.build();
-        } catch (LoginException exception) {
-            throw new JDALoginException(exception);
+        } catch (javax.security.auth.login.LoginException exception) {
+            throw new LoginException(exception);
         }
     }
 
     protected final void shutdown() {
-        if (jda == null) throw new JDANotStartedException("JDA is not started or crashed!");
+        if (jda == null) throw new NotStartedException("JDA is not started or crashed!");
         jda.shutdown();
     }
 
     public final ShardManager getJDA() {
-        if (jda == null) throw new JDANotStartedException("JDA is not started or crashed!");
+        if (jda == null) throw new NotStartedException("JDA is not started or crashed!");
         return jda;
     }
 }
