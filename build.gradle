@@ -12,4 +12,5 @@ repositories {
 
 dependencies {
     implementation 'net.dv8tion:JDA:4.2.0_229'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
 }
