@@ -2,11 +2,11 @@
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>[%d{HH:mm:ss}] [%t/%level]: [%logger{0}] %msg%n</pattern>
+            <pattern>[%d{HH:mm:ss}] %3.3X{jda.shard.id} [%logger{0}/%level]: %msg%n</pattern>
         </encoder>
     </appender>
 
     <root level="info">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
