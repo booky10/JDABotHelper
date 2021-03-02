@@ -65,6 +65,7 @@ import net.dv8tion.jda.api.events.user.UserTypingEvent;
 import net.dv8tion.jda.api.events.user.update.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import tk.booky.jdahelper.api.IConfiguration;
 import tk.booky.jdahelper.api.utils.JDAHelper;
 
 public final class Listener extends ListenerAdapter {
@@ -607,6 +608,16 @@ public final class Listener extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         JDAHelper.getEventManager().callEvent(event);
+
+        if (event.getUser().getIdLong() == event.getJDA().getSelfUser().getIdLong()) {
+            String language = JDAHelper.getLanguageManager().getLanguage(event.getGuild());
+            IConfiguration<?> configuration = JDAHelper.getConfigurationManager().getConfiguration(event.getGuild());
+
+            if (language != null && !configuration.contains("language")) {
+                configuration.set("language", language);
+                configuration.save(event.getGuild());
+            }
+        }
     }
 
     @Override
