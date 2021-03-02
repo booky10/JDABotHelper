@@ -80,5 +80,9 @@ public interface IConfiguration<T> {
 
     boolean contains(String path);
 
+    void set(String path, Object object);
+
+    void remove(String path);
+
     void save(File file);
 }

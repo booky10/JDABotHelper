@@ -89,6 +89,30 @@ public class JsonConfiguration implements IConfiguration<JsonConfigurationProvid
     }
 
     @Override
+    public void set(String path, Object object) {
+        remove(path);
+
+        if (object instanceof JsonElement) {
+            json.add(path, (JsonElement) object);
+        } else if (object instanceof Number) {
+            json.addProperty(path, (Number) object);
+        } else if (object instanceof String) {
+            json.addProperty(path, (String) object);
+        } else if (object instanceof Boolean) {
+            json.addProperty(path, (Boolean) object);
+        } else if (object instanceof Character) {
+            json.addProperty(path, (Character) object);
+        } else {
+            throw new IllegalArgumentException(object.toString());
+        }
+    }
+
+    @Override
+    public void remove(String path) {
+        if (contains(path)) json.remove(path);
+    }
+
+    @Override
     public void save(File file) {
         JDAHelper.getConfigurationManager().getProvider(JsonConfigurationProvider.class).write(file, this);
     }
