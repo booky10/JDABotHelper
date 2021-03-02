@@ -10,6 +10,7 @@ public class ImplementationManager implements IImplementationManager {
     private static final CommandManager commandManager = new CommandManager();
     private static final LanguageManager languageManager = new LanguageManager();
     private static final EventManager eventManager = new EventManager();
+    private static final ConfigurationManager configurationManager = new ConfigurationManager();
 
     public ImplementationManager() {
     }
@@ -32,5 +33,10 @@ public class ImplementationManager implements IImplementationManager {
     @Override
     public EventManager getEventManager() {
         return eventManager;
+    }
+
+    @Override
+    public ConfigurationManager getConfigurationManager() {
+        return configurationManager;
     }
 }

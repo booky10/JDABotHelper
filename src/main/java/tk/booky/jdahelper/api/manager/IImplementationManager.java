@@ -12,4 +12,6 @@ public interface IImplementationManager {
     ILanguageManager getLanguageManager();
 
     IEventManager getEventManager();
+
+    IConfigurationManager getConfigurationManager();
 }

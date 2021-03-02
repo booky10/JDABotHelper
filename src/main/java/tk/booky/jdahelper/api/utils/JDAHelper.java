@@ -5,11 +5,8 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.RestAction;
-import tk.booky.jdahelper.api.manager.IEventManager;
 import tk.booky.jdahelper.api.exceptions.api.ImplementationNotFoundException;
-import tk.booky.jdahelper.api.manager.ICommandManager;
-import tk.booky.jdahelper.api.manager.IImplementationManager;
-import tk.booky.jdahelper.api.manager.ILanguageManager;
+import tk.booky.jdahelper.api.manager.*;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -42,6 +39,10 @@ public class JDAHelper {
 
     public static IEventManager getEventManager() {
         return manager.getEventManager();
+    }
+
+    public static IConfigurationManager getConfigurationManager() {
+        return manager.getConfigurationManager();
     }
 
     @SafeVarargs
