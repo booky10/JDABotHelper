@@ -45,6 +45,10 @@ public class JDAHelper {
         return manager.getConfigurationManager();
     }
 
+    public static IImplementationManager getImplementationManager() {
+        return manager;
+    }
+
     @SafeVarargs
     public static RestAction<Message> sendEmbed(MessageChannel channel, String title, String body, Pair<String, String>... fields) {
         return sendEmbed(channel, new Color((int) (Math.random() * 0x1000000)), title, body, true, fields);
