@@ -53,6 +53,11 @@ public class ConfigurationManager implements IConfigurationManager {
     }
 
     @Override
+    public IConfiguration<?> getConfiguration(Guild guild) {
+        return getConfiguration(guild, getDefaultProvider());
+    }
+
+    @Override
     public File getConfigurationFile(Guild guild) {
         return new File(getConfigurationFolder(), guild.getId() + ".json");
     }
