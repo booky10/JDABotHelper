@@ -14,17 +14,17 @@ public class LanguageManager implements ILanguageManager {
 
     @Override
     public ILanguageProvider getLanguageProvider(String language, ILanguageProvider def) {
-        return languages.getOrDefault(language, def);
+        return languages.getOrDefault(language.toLowerCase(), def);
     }
 
     @Override
     public ILanguageProvider setLanguageProvider(String language, ILanguageProvider provider) {
-        return languages.put(language, provider);
+        return languages.put(language.toLowerCase(), provider);
     }
 
     @Override
     public ILanguageProvider removeLanguageProvider(String language) {
-        return languages.remove(language);
+        return languages.remove(language.toLowerCase());
     }
 
     @Override
