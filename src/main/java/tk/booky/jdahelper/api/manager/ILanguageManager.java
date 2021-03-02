@@ -20,4 +20,8 @@ public interface ILanguageManager {
     List<ILanguageProvider> getLanguageProviders();
 
     void clearLanguageProviders();
+
+    ILanguageProvider getDefaultLanguage();
+
+    boolean existsLanguage(String language);
 }

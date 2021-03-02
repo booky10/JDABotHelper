@@ -1,6 +1,7 @@
 package tk.booky.jdahelper.internal.manager;
 // Created by booky10 in JDABotHelper (16:47 02.03.21)
 
+import org.jetbrains.annotations.Nullable;
 import tk.booky.jdahelper.api.manager.ILanguageManager;
 import tk.booky.jdahelper.api.provider.ILanguageProvider;
 
@@ -35,5 +36,16 @@ public class LanguageManager implements ILanguageManager {
     @Override
     public void clearLanguageProviders() {
         languages.clear();
+    }
+
+    @Nullable
+    @Override
+    public ILanguageProvider getDefaultLanguage() {
+        return getLanguageProviders().stream().filter(ILanguageProvider::isDefault).findAny().orElse(null);
+    }
+
+    @Override
+    public boolean existsLanguage(String language) {
+        return languages.containsKey(language.toLowerCase());
     }
 }

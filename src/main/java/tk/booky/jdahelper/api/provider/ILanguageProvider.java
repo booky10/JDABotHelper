@@ -14,4 +14,6 @@ public interface ILanguageProvider {
     String getLanguageName();
 
     String getHelpCommand();
+
+    boolean isDefault();
 }
