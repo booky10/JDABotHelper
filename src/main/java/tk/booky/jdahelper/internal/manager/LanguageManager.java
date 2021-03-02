@@ -1,9 +1,12 @@
 package tk.booky.jdahelper.internal.manager;
 // Created by booky10 in JDABotHelper (16:47 02.03.21)
 
+import net.dv8tion.jda.api.entities.Guild;
 import org.jetbrains.annotations.Nullable;
+import tk.booky.jdahelper.api.IConfiguration;
 import tk.booky.jdahelper.api.manager.ILanguageManager;
 import tk.booky.jdahelper.api.provider.ILanguageProvider;
+import tk.booky.jdahelper.api.utils.JDAHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,8 +22,8 @@ public class LanguageManager implements ILanguageManager {
     }
 
     @Override
-    public ILanguageProvider setLanguageProvider(String language, ILanguageProvider provider) {
-        return languages.put(language.toLowerCase(), provider);
+    public ILanguageProvider registerLanguageProvider(ILanguageProvider provider) {
+        return languages.put(provider.getLanguageID().toLowerCase(), provider);
     }
 
     @Override
@@ -40,12 +43,25 @@ public class LanguageManager implements ILanguageManager {
 
     @Nullable
     @Override
-    public ILanguageProvider getDefaultLanguage() {
+    public ILanguageProvider getDefaultLanguageProvider() {
         return getLanguageProviders().stream().filter(ILanguageProvider::isDefault).findAny().orElse(null);
     }
 
     @Override
     public boolean existsLanguage(String language) {
         return languages.containsKey(language.toLowerCase());
+    }
+
+    @Override
+    public String getLanguage(Guild guild) {
+        IConfiguration<?> configuration = JDAHelper.getConfigurationManager().getConfiguration(guild);
+        ILanguageProvider defaultLanguageProvider = getDefaultLanguageProvider();
+        return configuration.getString("language", defaultLanguageProvider == null ? null : getDefaultLanguageProvider().getLanguageID());
+    }
+
+    @Override
+    public ILanguageProvider getLanguageProvider(Guild guild) {
+        String language = getLanguage(guild);
+        return language == null || !existsLanguage(language) ? null : getLanguageProvider(language);
     }
 }
