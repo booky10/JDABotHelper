@@ -16,4 +16,6 @@ public interface IConfigurationManager {
     <T extends IConfigurationProvider> IConfiguration<T> getConfiguration(Guild guild, T provider);
 
     File getConfigurationFile(Guild guild);
+
+    IConfigurationProvider getDefaultProvider();
 }

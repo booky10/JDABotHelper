@@ -3,6 +3,7 @@ package tk.booky.jdahelper.internal.manager;
 
 import net.dv8tion.jda.api.entities.Guild;
 import tk.booky.jdahelper.api.IConfiguration;
+import tk.booky.jdahelper.api.config.JsonConfigurationProvider;
 import tk.booky.jdahelper.api.exceptions.config.ProviderInitException;
 import tk.booky.jdahelper.api.manager.IConfigurationManager;
 import tk.booky.jdahelper.api.provider.IConfigurationProvider;
@@ -15,6 +16,10 @@ public class ConfigurationManager implements IConfigurationManager {
     private static final HashMap<Class<? extends IConfigurationProvider>, IConfigurationProvider> provider = new HashMap<>();
     private static final HashMap<String, IConfiguration<?>> configurations = new HashMap<>();
     private static final File configurationFolder = new File(".", "configs");
+
+    static {
+        provider.put(JsonConfigurationProvider.class, new JsonConfigurationProvider());
+    }
 
     @Override
     public File getConfigurationFolder() {
@@ -50,5 +55,10 @@ public class ConfigurationManager implements IConfigurationManager {
     @Override
     public File getConfigurationFile(Guild guild) {
         return new File(getConfigurationFolder(), guild.getId() + ".json");
+    }
+
+    @Override
+    public IConfigurationProvider getDefaultProvider() {
+        return provider.values().stream().filter(IConfigurationProvider::isDefault).findAny().orElse(null);
     }
 }
