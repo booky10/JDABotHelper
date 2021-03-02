@@ -47,6 +47,7 @@ public abstract class AbstractJDAMain {
             logger.info("    Emote Count: " + jda.getEmotes().size());
             logger.info("    Shard Count: " + jda.getShardsRunning() + "/" + jda.getShardsTotal() + " (Queued: " + jda.getShardsQueued() + ")");
             logger.info("   Average Ping: " + jda.getAverageGatewayPing());
+            logger.info(" Category Count: " + jda.getCategories().size());
             logger.info("Gateway Intents: " + jda.getGatewayIntents().stream().map(gatewayIntent -> StringUtils.capitalize(gatewayIntent.name().toLowerCase())).collect(Collectors.joining(", ")));
 
             logger.info("");
@@ -54,10 +55,7 @@ public abstract class AbstractJDAMain {
             logger.info("  Store Channel Count: " + jda.getStoreChannels().size());
             logger.info("  Voice Channel Count: " + jda.getVoiceChannels().size());
             logger.info("   Text Channel Count: " + jda.getTextChannels().size());
-            logger.info("       Category Count: " + jda.getCategories().size());
-
-            logger.info("");
-            logger.info("All Channel Count: " + (jda.getPrivateChannels().size() + jda.getStoreChannels().size() + jda.getVoiceChannels().size() + jda.getTextChannels().size() + jda.getCategories().size()));
+            logger.info("    All Channel Count: " + (jda.getPrivateChannels().size() + jda.getStoreChannels().size() + jda.getVoiceChannels().size() + jda.getTextChannels().size()));
         } catch (Throwable throwable) {
             throw new StartException(throwable);
         }
