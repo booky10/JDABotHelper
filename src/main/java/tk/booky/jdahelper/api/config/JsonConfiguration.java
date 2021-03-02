@@ -3,6 +3,7 @@ package tk.booky.jdahelper.api.config;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import net.dv8tion.jda.api.entities.Guild;
 import tk.booky.jdahelper.api.IConfiguration;
 import tk.booky.jdahelper.api.utils.JDAHelper;
 
@@ -115,6 +116,11 @@ public class JsonConfiguration implements IConfiguration<JsonConfigurationProvid
     @Override
     public void save(File file) {
         JDAHelper.getConfigurationManager().getProvider(JsonConfigurationProvider.class).write(file, this);
+    }
+
+    @Override
+    public void save(Guild guild) {
+        save(JDAHelper.getConfigurationManager().getConfigurationFile(guild));
     }
 
     public JsonObject getJson() {

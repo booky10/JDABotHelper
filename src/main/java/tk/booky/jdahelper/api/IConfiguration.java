@@ -1,6 +1,8 @@
 package tk.booky.jdahelper.api;
 // Created by booky10 in JDABotHelper (18:26 02.03.21)
 
+import net.dv8tion.jda.api.entities.Guild;
+
 import java.io.File;
 import java.util.List;
 
@@ -85,4 +87,6 @@ public interface IConfiguration<T> {
     void remove(String path);
 
     void save(File file);
+
+    void save(Guild guild);
 }
