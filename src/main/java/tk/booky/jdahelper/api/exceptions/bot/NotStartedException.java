@@ -7,16 +7,4 @@ public class NotStartedException extends JDAException {
 
     public NotStartedException() {
     }
-
-    public NotStartedException(String message) {
-        super(message);
-    }
-
-    public NotStartedException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public NotStartedException(Throwable cause) {
-        super(cause);
-    }
 }

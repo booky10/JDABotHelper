@@ -7,16 +7,4 @@ public class AlreadyStartedException extends JDAException {
 
     public AlreadyStartedException() {
     }
-
-    public AlreadyStartedException(String message) {
-        super(message);
-    }
-
-    public AlreadyStartedException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public AlreadyStartedException(Throwable cause) {
-        super(cause);
-    }
 }

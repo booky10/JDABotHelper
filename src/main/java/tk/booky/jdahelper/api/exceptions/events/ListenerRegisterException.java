@@ -5,18 +5,6 @@ import tk.booky.jdahelper.api.exceptions.JDAException;
 
 public class ListenerRegisterException extends JDAException {
 
-    public ListenerRegisterException() {
-        super();
-    }
-
-    public ListenerRegisterException(String message) {
-        super(message);
-    }
-
-    public ListenerRegisterException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
     public ListenerRegisterException(Throwable cause) {
         super(cause);
     }

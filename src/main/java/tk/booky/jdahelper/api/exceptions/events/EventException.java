@@ -5,18 +5,6 @@ import tk.booky.jdahelper.api.exceptions.JDAException;
 
 public class EventException extends JDAException {
 
-    public EventException() {
-        super();
-    }
-
-    public EventException(String message) {
-        super(message);
-    }
-
-    public EventException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
     public EventException(Throwable cause) {
         super(cause);
     }

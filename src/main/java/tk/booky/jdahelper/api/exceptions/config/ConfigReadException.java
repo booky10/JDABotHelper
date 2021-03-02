@@ -5,18 +5,6 @@ import tk.booky.jdahelper.api.exceptions.JDAException;
 
 public class ConfigReadException extends JDAException {
 
-    public ConfigReadException() {
-        super();
-    }
-
-    public ConfigReadException(String message) {
-        super(message);
-    }
-
-    public ConfigReadException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
     public ConfigReadException(Throwable cause) {
         super(cause);
     }
