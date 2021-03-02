@@ -7,10 +7,15 @@ group 'tk.booky'
 version '1.0'
 
 repositories {
+    mavenCentral()
+    mavenLocal()
     jcenter()
 }
 
 dependencies {
     implementation 'net.dv8tion:JDA:4.2.0_229'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
+
+    implementation 'org.apache.commons:commons-lang3:3.9'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
