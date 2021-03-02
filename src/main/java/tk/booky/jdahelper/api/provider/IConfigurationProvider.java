@@ -1,4 +1,4 @@
-package tk.booky.jdahelper.api.providers;
+package tk.booky.jdahelper.api.provider;
 // Created by booky10 in JDABotHelper (21:49 01.03.21)
 
 import java.io.File;

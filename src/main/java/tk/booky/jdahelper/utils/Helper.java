@@ -1,17 +1,16 @@
-package tk.booky.jdahelper.internal;
+package tk.booky.jdahelper.utils;
 // Created by booky10 in JDABotHelper (18:50 27.09.20)
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.requests.RestAction;
-import tk.booky.jdahelper.api.commands.ICommandManager;
 import tk.booky.jdahelper.api.event.AbstractEventManager;
-import tk.booky.jdahelper.api.language.ILanguageProvider;
+import tk.booky.jdahelper.api.manager.ICommandManager;
+import tk.booky.jdahelper.api.manager.ILanguageManager;
 import tk.booky.jdahelper.internal.events.EventManager;
 import tk.booky.jdahelper.internal.events.Listener;
-import tk.booky.jdahelper.internal.implementations.CommandManager;
-import tk.booky.jdahelper.internal.implementations.LanguageProvider;
-import tk.booky.jdahelper.utils.Pair;
+import tk.booky.jdahelper.internal.manager.CommandManager;
+import tk.booky.jdahelper.internal.manager.LanguageManager;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -20,7 +19,7 @@ import java.util.List;
 
 public class Helper {
 
-    private static ILanguageProvider languageProvider;
+    private static ILanguageManager languageManager;
     private static ICommandManager commandManager;
     private static AbstractEventManager eventManager;
     private static Listener listener;
@@ -35,9 +34,9 @@ public class Helper {
         return commandManager;
     }
 
-    public static ILanguageProvider getLanguageProvider() {
-        if (languageProvider == null) languageProvider = new LanguageProvider();
-        return languageProvider;
+    public static ILanguageManager getLanguageManager() {
+        if (languageManager == null) languageManager = new LanguageManager();
+        return languageManager;
     }
 
     public static AbstractEventManager getEventManager() {

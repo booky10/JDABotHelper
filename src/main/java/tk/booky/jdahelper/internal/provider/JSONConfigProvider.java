@@ -1,4 +1,4 @@
-package tk.booky.jdahelper.internal.providers;
+package tk.booky.jdahelper.internal.provider;
 // Created by booky10 in JDABotHelper (21:49 01.03.21)
 
 import com.google.gson.Gson;
@@ -7,7 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import tk.booky.jdahelper.api.exceptions.config.ConfigReadException;
 import tk.booky.jdahelper.api.exceptions.config.ConfigWriteException;
-import tk.booky.jdahelper.api.providers.IConfigurationProvider;
+import tk.booky.jdahelper.api.provider.IConfigurationProvider;
 
 import java.io.File;
 import java.io.FileReader;

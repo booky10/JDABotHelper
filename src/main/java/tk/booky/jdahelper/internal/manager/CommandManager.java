@@ -1,12 +1,12 @@
-package tk.booky.jdahelper.internal.implementations;
+package tk.booky.jdahelper.internal.manager;
 // Created by booky10 in JDABotHelper (18:09 27.09.20)
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
-import tk.booky.jdahelper.api.commands.Command;
-import tk.booky.jdahelper.api.commands.ICommandManager;
-import tk.booky.jdahelper.internal.Helper;
+import tk.booky.jdahelper.api.Command;
+import tk.booky.jdahelper.api.manager.ICommandManager;
+import tk.booky.jdahelper.utils.Helper;
 
 import java.awt.*;
 import java.util.Collections;
@@ -16,11 +16,6 @@ import java.util.Map;
 public class CommandManager implements ICommandManager {
 
     private static final HashMap<String, Command> commands = new HashMap<>();
-
-    static {
-        commands.put("help", null);
-        commands.put("hilfe", null);
-    }
 
     @Override
     public void executeCommand(Message message, String command, String[] args) {

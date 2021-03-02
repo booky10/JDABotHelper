@@ -1,8 +1,9 @@
-package tk.booky.jdahelper.api.commands;
+package tk.booky.jdahelper.api.manager;
 // Created by booky10 in JDABotHelper (18:02 04.10.20)
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import tk.booky.jdahelper.api.Command;
 
 import java.util.Map;
 
