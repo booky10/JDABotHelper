@@ -21,13 +21,14 @@ public final class EventManager implements IEventManager {
 
     @Override
     public void callEvent(Event event) {
-        registeredHandlers
+        new Thread(() -> registeredHandlers
                 .entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isAssignableFrom(event.getClass()))
                 .map(Map.Entry::getKey)
                 .sorted(new PriorityComparator())
-                .forEach(method -> invokeEventMethod(method, event));
+                .forEach(method -> invokeEventMethod(method, event)),
+                "Event Executor [" + event.getClass().getSimpleName() + "] " + event.hashCode()).start();
     }
 
     private void invokeEventMethod(Method method, Event event) {
