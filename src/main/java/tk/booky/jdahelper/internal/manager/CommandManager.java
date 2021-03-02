@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import tk.booky.jdahelper.api.Command;
 import tk.booky.jdahelper.api.manager.ICommandManager;
-import tk.booky.jdahelper.utils.Helper;
+import tk.booky.jdahelper.api.utils.Helper;
 
 import java.awt.*;
 import java.util.Collections;

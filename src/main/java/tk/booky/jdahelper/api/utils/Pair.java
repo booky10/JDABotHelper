@@ -1,4 +1,4 @@
-package tk.booky.jdahelper.utils;
+package tk.booky.jdahelper.api.utils;
 // Created by booky10 in JDABotHelper (21:25 27.09.20)
 
 public class Pair<K, V> {

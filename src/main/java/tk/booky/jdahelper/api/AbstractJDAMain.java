@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import tk.booky.jdahelper.api.exceptions.bot.AlreadyStartedException;
 import tk.booky.jdahelper.api.exceptions.bot.StartException;
 import tk.booky.jdahelper.api.exceptions.bot.NotStartedException;
-import tk.booky.jdahelper.utils.Helper;
+import tk.booky.jdahelper.api.utils.Helper;
 
 import java.util.Arrays;
 import java.util.List;

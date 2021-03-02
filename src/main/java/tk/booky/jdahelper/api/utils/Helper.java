@@ -1,16 +1,15 @@
-package tk.booky.jdahelper.utils;
+package tk.booky.jdahelper.api.utils;
 // Created by booky10 in JDABotHelper (18:50 27.09.20)
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.RestAction;
-import tk.booky.jdahelper.api.event.AbstractEventManager;
+import tk.booky.jdahelper.api.manager.IEventManager;
+import tk.booky.jdahelper.api.exceptions.api.ImplementationNotFoundException;
 import tk.booky.jdahelper.api.manager.ICommandManager;
+import tk.booky.jdahelper.api.manager.IImplementationManager;
 import tk.booky.jdahelper.api.manager.ILanguageManager;
-import tk.booky.jdahelper.internal.events.EventManager;
-import tk.booky.jdahelper.internal.events.Listener;
-import tk.booky.jdahelper.internal.manager.CommandManager;
-import tk.booky.jdahelper.internal.manager.LanguageManager;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -19,29 +18,30 @@ import java.util.List;
 
 public class Helper {
 
-    private static ILanguageManager languageManager;
-    private static ICommandManager commandManager;
-    private static AbstractEventManager eventManager;
-    private static Listener listener;
+    private static final IImplementationManager manager;
 
-    public static Listener getListener() {
-        if (listener == null) listener = new Listener();
-        return listener;
+    static {
+        try {
+            manager = (IImplementationManager) Class.forName("tk.booky.jdahelper.internal.manager.ImplementationManager").newInstance();
+        } catch (Throwable throwable) {
+            throw new ImplementationNotFoundException(throwable);
+        }
+    }
+
+    public static ListenerAdapter getListener() {
+        return manager.getListener();
     }
 
     public static ICommandManager getCommandManager() {
-        if (commandManager == null) commandManager = new CommandManager();
-        return commandManager;
+        return manager.getCommandManager();
     }
 
     public static ILanguageManager getLanguageManager() {
-        if (languageManager == null) languageManager = new LanguageManager();
-        return languageManager;
+        return manager.getLanguageManager();
     }
 
-    public static AbstractEventManager getEventManager() {
-        if (eventManager == null) eventManager = new EventManager();
-        return eventManager;
+    public static IEventManager getEventManager() {
+        return manager.getEventManager();
     }
 
     @SafeVarargs
