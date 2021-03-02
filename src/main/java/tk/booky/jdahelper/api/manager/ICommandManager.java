@@ -3,7 +3,7 @@ package tk.booky.jdahelper.api.manager;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import tk.booky.jdahelper.api.Command;
+import tk.booky.jdahelper.api.commands.Command;
 
 import java.util.Map;
 
@@ -18,4 +18,6 @@ public interface ICommandManager {
     void sendHelpMessage(MessageChannel channel);
 
     Map<String, Command> getRegisteredCommands();
+
+    Map<String, String> getAliases();
 }
