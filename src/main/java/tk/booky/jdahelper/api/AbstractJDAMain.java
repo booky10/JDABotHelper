@@ -10,8 +10,8 @@ import net.dv8tion.jda.internal.utils.JDALogger;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import tk.booky.jdahelper.api.exceptions.bot.AlreadyStartedException;
-import tk.booky.jdahelper.api.exceptions.bot.StartException;
 import tk.booky.jdahelper.api.exceptions.bot.NotStartedException;
+import tk.booky.jdahelper.api.exceptions.bot.StartException;
 import tk.booky.jdahelper.api.utils.JDAHelper;
 
 import java.util.Arrays;

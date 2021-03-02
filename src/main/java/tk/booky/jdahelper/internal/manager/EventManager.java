@@ -2,11 +2,11 @@ package tk.booky.jdahelper.internal.manager;
 // Created by booky10 in JDABotHelper (18:40 27.09.20)
 
 import net.dv8tion.jda.api.events.Event;
-import tk.booky.jdahelper.api.manager.IEventManager;
 import tk.booky.jdahelper.api.event.HandleEvent;
 import tk.booky.jdahelper.api.event.IListener;
 import tk.booky.jdahelper.api.exceptions.events.EventException;
 import tk.booky.jdahelper.api.exceptions.events.ListenerRegisterException;
+import tk.booky.jdahelper.api.manager.IEventManager;
 import tk.booky.jdahelper.internal.events.PriorityComparator;
 
 import java.lang.reflect.Method;
