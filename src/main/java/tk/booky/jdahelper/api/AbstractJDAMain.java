@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import tk.booky.jdahelper.api.exceptions.bot.AlreadyStartedException;
 import tk.booky.jdahelper.api.exceptions.bot.StartException;
 import tk.booky.jdahelper.api.exceptions.bot.NotStartedException;
-import tk.booky.jdahelper.api.utils.Helper;
+import tk.booky.jdahelper.api.utils.JDAHelper;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +29,7 @@ public abstract class AbstractJDAMain {
 
         builder.disableCache(Arrays.asList(CacheFlag.values()));
         builder.setMemberCachePolicy(MemberCachePolicy.ALL);
-        builder.addEventListeners(Helper.getListener());
+        builder.addEventListeners(JDAHelper.getListener());
         builder.setEnableShutdownHook(false);
         builder.setUseShutdownNow(true);
         builder.enableCache(cacheFlags);

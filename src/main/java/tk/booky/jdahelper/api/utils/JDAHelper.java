@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class Helper {
+public class JDAHelper {
 
     private static final IImplementationManager manager;
 

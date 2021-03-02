@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import tk.booky.jdahelper.api.Command;
 import tk.booky.jdahelper.api.manager.ICommandManager;
-import tk.booky.jdahelper.api.utils.Helper;
+import tk.booky.jdahelper.api.utils.JDAHelper;
 
 import java.awt.*;
 import java.util.Collections;
@@ -44,7 +44,7 @@ public class CommandManager implements ICommandManager {
 
     @Override
     public void sendHelpMessage(MessageChannel channel) {
-        Helper.sendEmbed(channel, Color.RED, "**__Help__**", "There are the following Commands:");
+        JDAHelper.sendEmbed(channel, Color.RED, "**__Help__**", "There are the following Commands:");
     }
 
     @Override
