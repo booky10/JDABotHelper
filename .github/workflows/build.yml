@@ -1,0 +1,43 @@
+name: build
+on: [ pull_request, push, workflow_dispatch ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        java: [ 1.8, 11 ]
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout Repository
+        id: checkout
+        uses: actions/checkout@v2
+
+      - name: Validate Gradle Wrapper
+        id: validate_gradle
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Setup JDK ${{ matrix.java }}
+        id: setup_jdk
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+
+      - name: Make Gradle Wrapper Executable
+        id: make_executable
+        run: chmod +x ./gradlew
+
+      - name: Build
+        id: build
+        run: ./gradlew jar shadowJar
+
+      - name: Publish to GitHub Packages
+        id: publish
+        run: ./gradlew publish
+
+      - name: Upload Generated Files
+        id: upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: "JDABotHelper JDK ${{ matrix.java }}"
+          path: build/libs/
