@@ -31,13 +31,16 @@ jobs:
         id: build
         run: ./gradlew jar shadowJar
 
-      - name: Publish to GitHub Packages
-        id: publish
-        run: ./gradlew publish
-
       - name: Upload Generated Files
         id: upload
         uses: actions/upload-artifact@v2
         with:
           name: "JDABotHelper JDK ${{ matrix.java }}"
           path: build/libs/
+
+      - name: Publish to GitHub Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: "{{ matrix.java }} == '1.8'"
+        id: publish
+        run: ./gradlew publish
