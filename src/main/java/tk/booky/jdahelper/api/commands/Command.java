@@ -10,14 +10,15 @@ import java.util.List;
 
 public abstract class Command {
 
-    private final String command;
+    private final String command, usage;
     private final List<String> alias;
     private final List<Permission> permissions;
 
     private final CommandExecutor executor;
 
-    public Command(String command, List<String> alias, List<Permission> permissions, CommandExecutor executor) {
+    public Command(String command, String usage, List<String> alias, List<Permission> permissions, CommandExecutor executor) {
         this.command = command;
+        this.usage = usage;
         this.alias = alias;
         this.permissions = permissions;
         this.executor = executor;
@@ -25,6 +26,10 @@ public abstract class Command {
 
     public String getCommand() {
         return command;
+    }
+
+    public String getUsage() {
+        return usage;
     }
 
     public List<String> getAlias() {
