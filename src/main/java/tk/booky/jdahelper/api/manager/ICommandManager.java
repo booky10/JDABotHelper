@@ -1,6 +1,7 @@
 package tk.booky.jdahelper.api.manager;
 // Created by booky10 in JDABotHelper (18:02 04.10.20)
 
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import org.jetbrains.annotations.Nullable;
@@ -21,4 +22,10 @@ public interface ICommandManager {
     Map<String, Command> getRegisteredCommands();
 
     Map<String, String> getAliases();
+
+    Command resolveCommand(String command);
+
+    String getPrefix(Guild guild);
+
+    void setPrefix(Guild guild, String prefix);
 }
