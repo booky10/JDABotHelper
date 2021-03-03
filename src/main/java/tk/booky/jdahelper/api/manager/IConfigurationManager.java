@@ -13,11 +13,15 @@ public interface IConfigurationManager {
 
     IConfigurationProvider getProvider(Class<? extends IConfigurationProvider> clazz);
 
-    <T extends IConfigurationProvider> IConfiguration<T> getConfiguration(Guild guild, T provider);
-
-    IConfiguration<?> getConfiguration(Guild guild);
-
     File getConfigurationFile(Guild guild);
 
     IConfigurationProvider getDefaultProvider();
+
+    void setDefaultProvider(Class<? extends IConfigurationProvider> provider);
+
+    <T extends IConfigurationProvider> IConfiguration<T> getConfiguration(Guild guild, Class<? extends IConfigurationProvider> providerClass);
+
+    default IConfiguration<?> getConfiguration(Guild guild) {
+        return getConfiguration(guild, getDefaultProvider().getClass());
+    }
 }

@@ -45,9 +45,4 @@ public class JsonConfigurationProvider implements IConfigurationProvider {
     public void writeDefault(File file) {
         write(file, new JsonConfiguration());
     }
-
-    @Override
-    public boolean isDefault() {
-        return true;
-    }
 }

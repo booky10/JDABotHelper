@@ -12,6 +12,4 @@ public interface IConfigurationProvider {
     <T extends IConfigurationProvider> void write(File file, IConfiguration<T> configuration);
 
     void writeDefault(File file);
-
-    boolean isDefault();
 }

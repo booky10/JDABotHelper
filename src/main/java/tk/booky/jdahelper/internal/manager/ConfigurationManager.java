@@ -16,10 +16,7 @@ public class ConfigurationManager implements IConfigurationManager {
     private static final HashMap<Class<? extends IConfigurationProvider>, IConfigurationProvider> provider = new HashMap<>();
     private static final HashMap<String, IConfiguration<?>> configurations = new HashMap<>();
     private static final File configurationFolder = new File(".", "configs");
-
-    static {
-        provider.put(JsonConfigurationProvider.class, new JsonConfigurationProvider());
-    }
+    private static Class<? extends IConfigurationProvider> defaultProvider = JsonConfigurationProvider.class;
 
     @Override
     public File getConfigurationFolder() {
@@ -41,20 +38,16 @@ public class ConfigurationManager implements IConfigurationManager {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends IConfigurationProvider> IConfiguration<T> getConfiguration(Guild guild, T provider) {
+    public <T extends IConfigurationProvider> IConfiguration<T> getConfiguration(Guild guild, Class<? extends IConfigurationProvider> providerClass) {
         if (!configurations.containsKey(guild.getId())) {
             File file = getConfigurationFile(guild);
-            if (!file.exists()) provider.writeDefault(file);
+            IConfigurationProvider provider = getProvider(providerClass);
 
+            if (!file.exists()) provider.writeDefault(file);
             configurations.put(guild.getId(), provider.read(file));
         }
 
         return (IConfiguration<T>) configurations.get(guild.getId());
-    }
-
-    @Override
-    public IConfiguration<?> getConfiguration(Guild guild) {
-        return getConfiguration(guild, getDefaultProvider());
     }
 
     @Override
@@ -64,6 +57,11 @@ public class ConfigurationManager implements IConfigurationManager {
 
     @Override
     public IConfigurationProvider getDefaultProvider() {
-        return provider.values().stream().filter(IConfigurationProvider::isDefault).findAny().orElse(null);
+        return getProvider(defaultProvider);
+    }
+
+    @Override
+    public void setDefaultProvider(Class<? extends IConfigurationProvider> provider) {
+        defaultProvider = provider;
     }
 }
