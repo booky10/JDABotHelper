@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractJDAMain {
 
-    protected static Logger logger = JDALogger.getLog(AbstractJDAMain.class);
+    protected static final Logger logger = JDALogger.getLog(AbstractJDAMain.class);
     private ShardManager jda;
 
     public final void startJDA(String token, List<GatewayIntent> gatewayIntents, List<CacheFlag> cacheFlags) {
