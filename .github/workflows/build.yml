@@ -3,9 +3,6 @@ on: [ pull_request, push, workflow_dispatch ]
 
 jobs:
   build:
-    strategy:
-      matrix:
-        java: [ 1.8, 11 ]
     runs-on: ubuntu-20.04
 
     steps:
@@ -17,11 +14,11 @@ jobs:
         id: validate_gradle
         uses: gradle/wrapper-validation-action@v1
 
-      - name: Setup JDK ${{ matrix.java }}
+      - name: Setup JDK 1.8
         id: setup_jdk
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java }}
+          java-version: 1.8
 
       - name: Make Gradle Wrapper Executable
         id: make_executable
@@ -35,12 +32,11 @@ jobs:
         id: upload
         uses: actions/upload-artifact@v2
         with:
-          name: "JDABotHelper JDK ${{ matrix.java }}"
+          name: "JDABotHelper"
           path: build/libs/
 
       - name: Publish to GitHub Packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: "${{ matrix.java }} == '1.8'"
         id: publish
         run: ./gradlew publish
