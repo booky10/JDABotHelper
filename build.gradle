@@ -6,10 +6,8 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
-def currentBuild = System.getenv().getOrDefault('BUILDER_NUMBER', System.getenv().getOrDefault('GIT_COMMIT', 'NOBUILD').substring(0, 7))
-
 group 'tk.booky'
-version '0.0.1' + (currentBuild == 'NOBUILD' ? '' : '_' + currentBuild)
+version '0.1.0' + (System.getenv('GITHUB_ACTIONS') == 'true' ? '_' + System.getenv('GITHUB_RUN_ID') : '')
 
 repositories {
     mavenCentral()
