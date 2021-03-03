@@ -65,8 +65,11 @@ import net.dv8tion.jda.api.events.user.UserTypingEvent;
 import net.dv8tion.jda.api.events.user.update.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-import tk.booky.jdahelper.api.IConfiguration;
+import tk.booky.jdahelper.api.events.GuildCommandReceivedEvent;
 import tk.booky.jdahelper.api.utils.JDAHelper;
+
+import java.util.Arrays;
+import java.util.regex.Matcher;
 
 public final class Listener extends ListenerAdapter {
 
@@ -182,7 +185,19 @@ public final class Listener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
-        JDAHelper.getEventManager().callEvent(event);
+        String prefix = JDAHelper.getCommandManager().getPrefix(event.getGuild());
+        String messageContent = event.getMessage().getContentRaw();
+
+        if (messageContent.startsWith(prefix)) {
+            String[] args = messageContent.split(" ");
+            String command = args[0].replaceFirst(Matcher.quoteReplacement(prefix), "");
+            args = Arrays.copyOfRange(args, 1, args.length);
+
+            JDAHelper.getEventManager().callEvent(new GuildCommandReceivedEvent(event.getJDA(), event.getResponseNumber(), event.getMessage(), command, args, JDAHelper.getCommandManager().existsCommand(command)));
+            JDAHelper.getCommandManager().executeCommand(event.getMessage(), command, args);
+        } else {
+            JDAHelper.getEventManager().callEvent(event);
+        }
     }
 
     @Override
