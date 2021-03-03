@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
+import org.jetbrains.annotations.Nullable;
 import tk.booky.jdahelper.api.commands.Command;
 import tk.booky.jdahelper.api.manager.ICommandManager;
 import tk.booky.jdahelper.api.utils.JDAHelper;
@@ -30,8 +31,8 @@ public class CommandManager implements ICommandManager {
             if (message.getChannelType().equals(ChannelType.TEXT)) {
                 TextChannel channel = (TextChannel) message.getChannel();
 
-                if (trimmedCommand.equalsIgnoreCase(JDAHelper.getLanguageManager().getLanguageProvider(channel.getGuild()).getHelpCommand())) {
-                    sendHelpMessage(channel);
+                if (trimmedCommand.equals(trimCommand(JDAHelper.getLanguageManager().getLanguageProvider(channel.getGuild()).getHelpTranslation().getHelpCommand()))) {
+                    sendHelpMessage(channel, null);
                 } else {
                     String alias = CommandManager.alias.get(trimmedCommand);
                     Command commandObject = commands.get(alias == null ? trimmedCommand : alias);
@@ -62,7 +63,7 @@ public class CommandManager implements ICommandManager {
     }
 
     @Override
-    public void sendHelpMessage(MessageChannel channel) {
+    public void sendHelpMessage(MessageChannel channel, @Nullable String command) {
         // TODO: send translated help message
     }
 

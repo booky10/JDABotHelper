@@ -3,6 +3,7 @@ package tk.booky.jdahelper.api.manager;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import org.jetbrains.annotations.Nullable;
 import tk.booky.jdahelper.api.commands.Command;
 
 import java.util.Map;
@@ -15,7 +16,7 @@ public interface ICommandManager {
 
     void unregisterCommand(Command command);
 
-    void sendHelpMessage(MessageChannel channel);
+    void sendHelpMessage(MessageChannel channel, @Nullable String command);
 
     Map<String, Command> getRegisteredCommands();
 

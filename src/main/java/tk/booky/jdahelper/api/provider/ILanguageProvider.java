@@ -1,6 +1,8 @@
 package tk.booky.jdahelper.api.provider;
 // Created by booky10 in JDABotHelper (18:35 04.10.20)
 
+import tk.booky.jdahelper.api.commands.IHelpTranslation;
+
 public interface ILanguageProvider {
 
     void setTranslation(String key, String translation);
@@ -13,7 +15,7 @@ public interface ILanguageProvider {
 
     String getLanguageName();
 
-    String getHelpCommand();
+    IHelpTranslation getHelpTranslation();
 
     boolean isDefault();
 }
