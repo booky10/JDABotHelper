@@ -4,7 +4,6 @@ package tk.booky.jdahelper.api.utils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.requests.RestAction;
 import tk.booky.jdahelper.api.exceptions.api.ImplementationNotFoundException;
 import tk.booky.jdahelper.api.manager.*;
 
