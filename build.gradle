@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'tk.booky'
-version '0.1.0' + (System.getenv('GITHUB_ACTIONS') == 'true' ? '_' + System.getenv('GITHUB_RUN_ID') : '')
+version '0.1.0' + (System.getenv('GITHUB_ACTIONS') == 'true' ? '_' + System.getenv('GITHUB_RUN_NUMBER') : '')
 
 repositories {
     mavenCentral()
