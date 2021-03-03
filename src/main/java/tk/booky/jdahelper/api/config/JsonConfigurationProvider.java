@@ -9,6 +9,7 @@ import tk.booky.jdahelper.api.exceptions.config.ConfigReadException;
 import tk.booky.jdahelper.api.exceptions.config.ConfigWriteException;
 import tk.booky.jdahelper.api.exceptions.config.WrongImplementationException;
 import tk.booky.jdahelper.api.provider.IConfigurationProvider;
+import tk.booky.jdahelper.api.utils.JDAHelper;
 
 import java.io.File;
 import java.io.FileReader;
@@ -43,6 +44,11 @@ public class JsonConfigurationProvider implements IConfigurationProvider {
 
     @Override
     public void writeDefault(File file) {
-        write(file, new JsonConfiguration());
+        JsonConfiguration configuration = new JsonConfiguration();
+
+        configuration.set("language", JDAHelper.getLanguageManager().getDefaultLanguageProvider().getLanguageID());
+        configuration.set("prefix", "!");
+
+        write(file, configuration);
     }
 }

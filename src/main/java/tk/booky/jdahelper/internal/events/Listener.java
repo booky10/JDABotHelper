@@ -608,16 +608,6 @@ public final class Listener extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         JDAHelper.getEventManager().callEvent(event);
-
-        if (event.getUser().getIdLong() == event.getJDA().getSelfUser().getIdLong()) {
-            String language = JDAHelper.getLanguageManager().getLanguage(event.getGuild());
-            IConfiguration<?> configuration = JDAHelper.getConfigurationManager().getConfiguration(event.getGuild());
-
-            if (language != null && !configuration.contains("language")) {
-                configuration.set("language", language);
-                configuration.save(event.getGuild());
-            }
-        }
     }
 
     @Override
