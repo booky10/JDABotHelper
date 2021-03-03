@@ -109,7 +109,7 @@ public class CommandManager implements ICommandManager {
     @Override
     public void setPrefix(Guild guild, String prefix) {
         IConfiguration<?> configuration = JDAHelper.getConfigurationManager().getConfiguration(guild);
-        configuration.set("prefix", prefix);
+        configuration.set("prefix", prefix.trim());
         configuration.save(guild);
     }
 }
