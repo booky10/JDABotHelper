@@ -238,6 +238,7 @@ public final class Listener extends ListenerAdapter {
     @Override
     public void onPrivateMessageReceived(@NotNull PrivateMessageReceivedEvent event) {
         JDAHelper.getEventManager().callEvent(event);
+        new Thread(() -> JDAHelper.getCommandManager().sendHelpMessage(event.getChannel(), null).editMessage("Sorry, at the moment there is no support for commands in private messages!").complete(), "Private Help Message Sender [" + event.getAuthor().getAsTag() + "]").start();
     }
 
     @Override
