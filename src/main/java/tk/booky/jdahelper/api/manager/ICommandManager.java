@@ -17,7 +17,7 @@ public interface ICommandManager {
 
     void unregisterCommand(Command command);
 
-    void sendHelpMessage(MessageChannel channel, @Nullable String command);
+    Message sendHelpMessage(MessageChannel channel, @Nullable String command);
 
     Map<String, Command> getRegisteredCommands();
 

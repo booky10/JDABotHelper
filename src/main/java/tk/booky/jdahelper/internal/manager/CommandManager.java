@@ -67,7 +67,7 @@ public class CommandManager implements ICommandManager {
     }
 
     @Override
-    public void sendHelpMessage(MessageChannel channel, @Nullable String command) {
+    public Message sendHelpMessage(MessageChannel channel, @Nullable String command) {
         GuildChannel guildChannel = channel.getType().isGuild() ? (GuildChannel) channel : null;
         IHelpTranslation helpTranslation = channel.getType().isGuild() ? JDAHelper.getLanguageManager().getLanguageProvider(((GuildChannel) channel).getGuild()).getHelpTranslation() : new IHelpTranslation() {
         };
@@ -81,7 +81,7 @@ public class CommandManager implements ICommandManager {
             body = String.format(helpTranslation.getEntryFormat(), getPrefix(guildChannel == null ? null : guildChannel.getGuild()), command, resolved.getUsage());
         }
 
-        JDAHelper.sendEmbed(channel, Color.YELLOW, helpTranslation.getMessageTitle(), body);
+        return JDAHelper.sendEmbed(channel, Color.YELLOW, helpTranslation.getMessageTitle(), body);
     }
 
     @Override
