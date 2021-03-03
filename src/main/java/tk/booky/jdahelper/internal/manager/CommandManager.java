@@ -112,4 +112,10 @@ public class CommandManager implements ICommandManager {
         configuration.set("prefix", prefix.trim());
         configuration.save(guild);
     }
+
+    @Override
+    public boolean existsCommand(String command) {
+        command = trimCommand(command);
+        return commands.containsKey(command) || alias.containsKey(command);
+    }
 }

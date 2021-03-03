@@ -28,4 +28,6 @@ public interface ICommandManager {
     String getPrefix(Guild guild);
 
     void setPrefix(Guild guild, String prefix);
+
+    boolean existsCommand(String command);
 }
