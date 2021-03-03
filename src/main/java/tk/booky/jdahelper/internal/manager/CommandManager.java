@@ -18,6 +18,10 @@ public class CommandManager implements ICommandManager {
     private static final HashMap<String, Command> commands = new HashMap<>();
     private static final HashMap<String, String> alias = new HashMap<>();
 
+    private static String trimCommand(String command) {
+        return command.trim().toLowerCase().replace(' ', '_');
+    }
+
     @Override
     public void executeCommand(Message message, String command, String[] args) {
         String trimmedCommand = trimCommand(command);
@@ -70,9 +74,5 @@ public class CommandManager implements ICommandManager {
     @Override
     public Map<String, String> getAliases() {
         return Collections.unmodifiableMap(alias);
-    }
-
-    private static String trimCommand(String command) {
-        return command.trim().toLowerCase().replace(' ', '_');
     }
 }
