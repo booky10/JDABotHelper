@@ -50,29 +50,29 @@ public class JDAHelper {
     }
 
     @SafeVarargs
-    public static RestAction<Message> sendEmbed(MessageChannel channel, String title, String body, Pair<String, String>... fields) {
+    public static Message sendEmbed(MessageChannel channel, String title, String body, Pair<String, String>... fields) {
         return sendEmbed(channel, new Color((int) (Math.random() * 0x1000000)), title, body, true, fields);
     }
 
-    public static RestAction<Message> sendEmbed(MessageChannel channel, String title, String body, List<Pair<String, String>> fields) {
+    public static Message sendEmbed(MessageChannel channel, String title, String body, List<Pair<String, String>> fields) {
         return sendEmbed(channel, new Color((int) (Math.random() * 0x1000000)), title, body, true, fields);
     }
 
     @SafeVarargs
-    public static RestAction<Message> sendEmbed(MessageChannel channel, Color color, String title, String body, Pair<String, String>... fields) {
+    public static Message sendEmbed(MessageChannel channel, Color color, String title, String body, Pair<String, String>... fields) {
         return sendEmbed(channel, color, title, body, true, fields);
     }
 
-    public static RestAction<Message> sendEmbed(MessageChannel channel, Color color, String title, String body, List<Pair<String, String>> fields) {
+    public static Message sendEmbed(MessageChannel channel, Color color, String title, String body, List<Pair<String, String>> fields) {
         return sendEmbed(channel, color, title, body, true, fields);
     }
 
     @SafeVarargs
-    public static RestAction<Message> sendEmbed(MessageChannel channel, Color color, String title, String body, Boolean inLine, Pair<String, String>... fields) {
+    public static Message sendEmbed(MessageChannel channel, Color color, String title, String body, Boolean inLine, Pair<String, String>... fields) {
         return sendEmbed(channel, color, title, body, inLine, Arrays.asList(fields));
     }
 
-    public static RestAction<Message> sendEmbed(MessageChannel channel, Color color, String title, String body, Boolean inLine, List<Pair<String, String>> fields) {
+    public static Message sendEmbed(MessageChannel channel, Color color, String title, String body, Boolean inLine, List<Pair<String, String>> fields) {
         EmbedBuilder builder = new EmbedBuilder();
 
         builder.setTitle(title);
@@ -92,6 +92,6 @@ public class JDAHelper {
             builder.setFooter(channel.getName());
         }
 
-        return channel.sendMessage(builder.build());
+        return channel.sendMessage(builder.build()).complete();
     }
 }
