@@ -50,7 +50,8 @@ publishing {
         maven(MavenPublication) {
             artifactId = 'jdabothelper'
 
-            artifact shadowJar { classifier '' }
+            artifact jar { classifier '' }
+            artifact shadowJar { classifier 'all' }
             artifact sourcesJar { classifier 'sources' }
             artifact javadocJar { classifier 'javadoc' }
         }
