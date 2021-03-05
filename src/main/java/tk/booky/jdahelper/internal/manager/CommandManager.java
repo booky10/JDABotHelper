@@ -15,6 +15,7 @@ import java.awt.*;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CommandManager implements ICommandManager {
@@ -40,7 +41,9 @@ public class CommandManager implements ICommandManager {
                     } else {
                         Command commandObject = resolveCommand(trimmedCommand);
                         if (commandObject != null) {
-                            commandObject.execute(channel, message, channel.getGuild().getMember(message.getAuthor()), command, args);
+                            if (Objects.requireNonNull(message.getGuild().getMemberById(message.getAuthor().getId())).hasPermission(commandObject.getPermissions())) {
+                                commandObject.execute(channel, message, channel.getGuild().getMember(message.getAuthor()), command, args);
+                            }
                         }
                     }
                 }
