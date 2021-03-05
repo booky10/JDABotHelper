@@ -64,12 +64,12 @@ import net.dv8tion.jda.api.events.user.UserActivityStartEvent;
 import net.dv8tion.jda.api.events.user.UserTypingEvent;
 import net.dv8tion.jda.api.events.user.update.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import tk.booky.jdahelper.api.events.GuildCommandReceivedEvent;
 import tk.booky.jdahelper.api.utils.JDAHelper;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
 
 public final class Listener extends ListenerAdapter {
 
@@ -190,7 +190,7 @@ public final class Listener extends ListenerAdapter {
 
         if (messageContent.startsWith(prefix)) {
             String[] args = messageContent.split(" ");
-            String command = args[0].replaceFirst(Matcher.quoteReplacement(prefix), "");
+            String command = StringUtils.replaceOnce(args[0], prefix, "");
             args = Arrays.copyOfRange(args, 1, args.length);
 
             JDAHelper.getEventManager().callEvent(new GuildCommandReceivedEvent(event.getJDA(), event.getResponseNumber(), event.getMessage(), command, args, JDAHelper.getCommandManager().existsCommand(command)));
