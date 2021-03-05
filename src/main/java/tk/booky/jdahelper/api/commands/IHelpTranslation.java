@@ -3,23 +3,13 @@ package tk.booky.jdahelper.api.commands;
 
 public interface IHelpTranslation {
 
-    default String getHelpCommand() {
-        return "help";
-    }
+    String getHelpCommand();
 
-    default String getMessageTitle() {
-        return "__Command Help__";
-    }
+    String getMessageTitle();
 
-    default String getEntryFormat() {
-        return "**%s%s** %s";
-    }
+    String getEntryFormat();
 
-    default String getSpecificFormat() {
-        return "**%s%s**\n%s (_%s_)";
-    }
+    String getSpecificFormat();
 
-    default String getNotFoundMessage() {
-        return "The command %s could not be found!";
-    }
+    String getNotFoundMessage();
 }

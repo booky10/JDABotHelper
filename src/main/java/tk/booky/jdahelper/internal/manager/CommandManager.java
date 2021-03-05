@@ -9,6 +9,7 @@ import tk.booky.jdahelper.api.commands.IHelpTranslation;
 import tk.booky.jdahelper.api.exceptions.api.CommandException;
 import tk.booky.jdahelper.api.manager.ICommandManager;
 import tk.booky.jdahelper.api.utils.JDAHelper;
+import tk.booky.jdahelper.internal.fallback.FallbackHelpTranslation;
 
 import java.awt.*;
 import java.util.Collections;
@@ -69,7 +70,7 @@ public class CommandManager implements ICommandManager {
     @Override
     public Message sendHelpMessage(MessageChannel channel, @Nullable String command) {
         GuildChannel guildChannel = channel.getType().isGuild() ? (GuildChannel) channel : null;
-        IHelpTranslation helpTranslation = channel.getType().isGuild() ? JDAHelper.getLanguageManager().getLanguageProvider(((GuildChannel) channel).getGuild()).getHelpTranslation() : new IHelpTranslation() {
+        IHelpTranslation helpTranslation = channel.getType().isGuild() ? JDAHelper.getLanguageManager().getLanguageProvider(((GuildChannel) channel).getGuild()).getHelpTranslation() : new FallbackHelpTranslation() {
         };
 
         String body;

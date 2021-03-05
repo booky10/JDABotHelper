@@ -2,11 +2,13 @@ package tk.booky.jdahelper.internal.manager;
 // Created by booky10 in JDABotHelper (16:47 02.03.21)
 
 import net.dv8tion.jda.api.entities.Guild;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tk.booky.jdahelper.api.IConfiguration;
 import tk.booky.jdahelper.api.manager.ILanguageManager;
 import tk.booky.jdahelper.api.provider.ILanguageProvider;
 import tk.booky.jdahelper.api.utils.JDAHelper;
+import tk.booky.jdahelper.internal.fallback.FallbackLanguageProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import java.util.List;
 public class LanguageManager implements ILanguageManager {
 
     private final HashMap<String, ILanguageProvider> languages = new HashMap<>();
+    private static final FallbackLanguageProvider FALLBACK_LANGUAGE_PROVIDER = new FallbackLanguageProvider();
 
     @Override
     public ILanguageProvider getLanguageProvider(String language, ILanguageProvider def) {
@@ -41,10 +44,9 @@ public class LanguageManager implements ILanguageManager {
         languages.clear();
     }
 
-    @Nullable
     @Override
     public ILanguageProvider getDefaultLanguageProvider() {
-        return getLanguageProviders().stream().filter(ILanguageProvider::isDefault).findAny().orElse(null);
+        return getLanguageProviders().stream().filter(ILanguageProvider::isDefault).findAny().orElse(FALLBACK_LANGUAGE_PROVIDER);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class LanguageManager implements ILanguageManager {
     public String getLanguage(Guild guild) {
         IConfiguration<?> configuration = JDAHelper.getConfigurationManager().getConfiguration(guild);
         ILanguageProvider defaultLanguageProvider = getDefaultLanguageProvider();
-        return configuration.getString("language", defaultLanguageProvider == null ? null : getDefaultLanguageProvider().getLanguageID());
+        return configuration.getString("language", defaultLanguageProvider.getLanguageID());
     }
 
     @Override
