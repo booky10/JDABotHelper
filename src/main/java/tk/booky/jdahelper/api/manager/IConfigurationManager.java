@@ -11,6 +11,8 @@ public interface IConfigurationManager {
 
     File getConfigurationFolder();
 
+    void setConfigurationFolder(File folder);
+
     IConfigurationProvider getProvider(Class<? extends IConfigurationProvider> clazz);
 
     File getConfigurationFile(Guild guild);

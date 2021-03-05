@@ -4,6 +4,7 @@ package tk.booky.jdahelper.internal.manager;
 import net.dv8tion.jda.api.entities.Guild;
 import tk.booky.jdahelper.api.IConfiguration;
 import tk.booky.jdahelper.api.config.JsonConfigurationProvider;
+import tk.booky.jdahelper.api.exceptions.config.FileNotDirectoryException;
 import tk.booky.jdahelper.api.exceptions.config.ProviderInitException;
 import tk.booky.jdahelper.api.manager.IConfigurationManager;
 import tk.booky.jdahelper.api.provider.IConfigurationProvider;
@@ -15,12 +16,19 @@ public class ConfigurationManager implements IConfigurationManager {
 
     private static final HashMap<Class<? extends IConfigurationProvider>, IConfigurationProvider> provider = new HashMap<>();
     private static final HashMap<String, IConfiguration<?>> configurations = new HashMap<>();
-    private static final File configurationFolder = new File(".", "configs");
+    private static File configurationFolder = new File(".", "configs");
     private static Class<? extends IConfigurationProvider> defaultProvider = JsonConfigurationProvider.class;
 
     @Override
     public File getConfigurationFolder() {
+        if (!configurationFolder.exists()) configurationFolder.mkdirs();
         return configurationFolder;
+    }
+
+    @Override
+    public void setConfigurationFolder(File folder) {
+        if (folder.exists() && !folder.isDirectory()) throw new FileNotDirectoryException();
+        configurationFolder = folder;
     }
 
     @Override
