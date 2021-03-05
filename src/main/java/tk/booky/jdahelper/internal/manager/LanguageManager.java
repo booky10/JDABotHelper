@@ -18,6 +18,10 @@ public class LanguageManager implements ILanguageManager {
     private final HashMap<String, ILanguageProvider> languages = new HashMap<>();
     private static final FallbackLanguageProvider FALLBACK_LANGUAGE_PROVIDER = new FallbackLanguageProvider();
 
+    public LanguageManager() {
+        languages.put(FALLBACK_LANGUAGE_PROVIDER.getLanguageID(), FALLBACK_LANGUAGE_PROVIDER);
+    }
+
     @Override
     public ILanguageProvider getLanguageProvider(String language, ILanguageProvider def) {
         return languages.getOrDefault(language.toLowerCase(), def);
