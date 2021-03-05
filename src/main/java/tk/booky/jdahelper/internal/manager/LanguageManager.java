@@ -2,8 +2,6 @@ package tk.booky.jdahelper.internal.manager;
 // Created by booky10 in JDABotHelper (16:47 02.03.21)
 
 import net.dv8tion.jda.api.entities.Guild;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import tk.booky.jdahelper.api.IConfiguration;
 import tk.booky.jdahelper.api.manager.ILanguageManager;
 import tk.booky.jdahelper.api.provider.ILanguageProvider;
@@ -11,6 +9,7 @@ import tk.booky.jdahelper.api.utils.JDAHelper;
 import tk.booky.jdahelper.internal.fallback.FallbackLanguageProvider;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class LanguageManager implements ILanguageManager {
 
     @Override
     public List<ILanguageProvider> getLanguageProviders() {
-        return new ArrayList<>(languages.values());
+        return Collections.unmodifiableList(new ArrayList<>(languages.values()));
     }
 
     @Override
