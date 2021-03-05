@@ -3,11 +3,21 @@ plugins {
     id 'idea'
 
     id 'maven-publish'
+    id 'com.jfrog.bintray' version '1.8.5'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
+def getGitTag = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--tags', '--abbrev=0'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
 group 'tk.booky'
-version '0.1.0' + (System.getenv('GITHUB_ACTIONS') == 'true' ? '_' + System.getenv('GITHUB_RUN_NUMBER') : '')
+version '0.1.0'
 
 repositories {
     mavenCentral()
@@ -33,21 +43,30 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
-publishing {
-    repositories {
-        maven {
-            name = 'GitHub'
-            url = uri('https://maven.pkg.github.com/booky10/JDABotHelper')
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['Bintray']
 
-            credentials {
-                username = 'booky10'
-                password = System.getenv('GITHUB_TOKEN')
-            }
+    pkg {
+        repo = 'JDABotHelper'
+        name = project.rootProject.name
+        publish = true
+
+        vcsUrl = 'https://github.com/booky10/JDABotHelper.git'
+        licenses = ['MIT']
+
+        version {
+            name = project.version as String
+            released = new Date().toString()
+            vcsTag = "${getGitTag}"
         }
     }
+}
 
+publishing {
     publications {
-        maven(MavenPublication) {
+        Bintray(MavenPublication) {
             artifactId = 'jdabothelper'
 
             artifact jar { classifier '' }
