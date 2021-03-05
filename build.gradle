@@ -7,15 +7,6 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
-def getGitTag = { ->
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'describe', '--tags', '--abbrev=0'
-        standardOutput = stdout
-    }
-    return stdout.toString().trim()
-}
-
 group 'tk.booky'
 version '0.1.1'
 
@@ -59,7 +50,7 @@ bintray {
         version {
             name = project.version as String
             released = new Date().toString()
-            vcsTag = "${getGitTag}"
+            vcsTag = 'v' + (project.version as String)
         }
     }
 }
