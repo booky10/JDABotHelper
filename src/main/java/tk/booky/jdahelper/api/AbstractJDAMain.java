@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractJDAMain {
 
-    protected static final Logger logger = JDALogger.getLog(AbstractJDAMain.class);
     private ShardManager jda;
 
     public final void startJDA(String token, List<GatewayIntent> gatewayIntents, List<CacheFlag> cacheFlags) {
@@ -37,25 +36,6 @@ public abstract class AbstractJDAMain {
 
         try {
             jda = builder.build();
-
-            logger.info("Bot Information");
-            logger.info("");
-
-            logger.info("     User Count: " + jda.getUsers().size());
-            logger.info("     Role Count: " + jda.getRoles().size());
-            logger.info("    Guild Count: " + jda.getGuilds().size());
-            logger.info("    Emote Count: " + jda.getEmotes().size());
-            logger.info("    Shard Count: " + jda.getShardsRunning() + "/" + jda.getShardsTotal() + " (Queued: " + jda.getShardsQueued() + ")");
-            logger.info("   Average Ping: " + jda.getAverageGatewayPing());
-            logger.info(" Category Count: " + jda.getCategories().size());
-            logger.info("Gateway Intents: " + jda.getGatewayIntents().stream().map(gatewayIntent -> StringUtils.capitalize(gatewayIntent.name().toLowerCase())).collect(Collectors.joining(", ")));
-
-            logger.info("");
-            logger.info("Private Channel Count: " + jda.getPrivateChannels().size());
-            logger.info("  Store Channel Count: " + jda.getStoreChannels().size());
-            logger.info("  Voice Channel Count: " + jda.getVoiceChannels().size());
-            logger.info("   Text Channel Count: " + jda.getTextChannels().size());
-            logger.info("    All Channel Count: " + (jda.getPrivateChannels().size() + jda.getStoreChannels().size() + jda.getVoiceChannels().size() + jda.getTextChannels().size()));
         } catch (Throwable throwable) {
             throw new StartException(throwable);
         }
