@@ -4,6 +4,8 @@ package tk.booky.jdahelper.api.utils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.MiscUtil;
+import org.jetbrains.annotations.Nullable;
 import tk.booky.jdahelper.api.exceptions.api.ImplementationNotFoundException;
 import tk.booky.jdahelper.api.manager.*;
 
@@ -92,5 +94,34 @@ public class JDAHelper {
         }
 
         return channel.sendMessage(builder.build()).complete();
+    }
+
+    public static boolean isValidSnowflake(String input) {
+        try {
+            MiscUtil.parseSnowflake(input);
+            return true;
+        } catch (IllegalArgumentException exception) {
+            return false;
+        }
+    }
+
+    public static String replaceID(String input) {
+        return input.replaceAll("\\D+", "");
+    }
+
+    @Nullable
+    public static TextChannel getTextChannel(Guild guild, String input) {
+        input = replaceID(input);
+
+        if (!isValidSnowflake(input)) return null;
+        else return guild.getTextChannelById(input);
+    }
+
+    @Nullable
+    public static VoiceChannel getVoiceChannel(Guild guild, String input) {
+        input = replaceID(input);
+
+        if (!isValidSnowflake(input)) return null;
+        else return guild.getVoiceChannelById(input);
     }
 }
