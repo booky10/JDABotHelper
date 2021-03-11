@@ -25,18 +25,18 @@ jobs:
         id: make_executable
         run: chmod +x ./gradlew
 
-      - name: Build
+      - name: Build for Artifacts
         id: build
         run: ./gradlew jar shadowJar
 
-      - name: Upload Generated Files
+      - name: Upload Generated Files as Artifact
         id: upload
         uses: actions/upload-artifact@v2
         with:
           name: "JDABotHelper"
           path: build/libs/
 
-      - name: Publish to GitHub Packages
+      - name: Publish to Brintray
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
