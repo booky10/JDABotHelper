@@ -105,10 +105,6 @@ public class JDAHelper {
         }
     }
 
-    public static String replaceID(String input) {
-        return input.replaceAll("\\D+", "");
-    }
-
     @Nullable
     public static TextChannel getTextChannel(Guild guild, String input) {
         input = replaceID(input);
@@ -123,5 +119,13 @@ public class JDAHelper {
 
         if (!isValidSnowflake(input)) return null;
         else return guild.getVoiceChannelById(input);
+    }
+
+    public static String replaceID(String input) {
+        return input.replaceAll("\\D+", "");
+    }
+
+    public static String escapeMarkdown(String input) {
+        return input.replaceAll("([_`~*>])", "\\\\$1");
     }
 }
