@@ -121,6 +121,14 @@ public class JDAHelper {
         else return guild.getVoiceChannelById(input);
     }
 
+    @Nullable
+    public static Role getRole(Guild guild, String input) {
+        input = replaceID(input);
+
+        if (!isValidSnowflake(input)) return null;
+        else return guild.getRoleById(input);
+    }
+
     public static String replaceID(String input) {
         return input.replaceAll("\\D+", "");
     }
