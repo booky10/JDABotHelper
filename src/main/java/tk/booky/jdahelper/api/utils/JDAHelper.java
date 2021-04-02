@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class JDAHelper {
 
     private static final IImplementationManager manager;
@@ -127,6 +128,46 @@ public class JDAHelper {
 
         if (!isValidSnowflake(input)) return null;
         else return guild.getRoleById(input);
+    }
+
+    @Nullable
+    public static Emote getEmote(Guild guild, String input) {
+        input = replaceID(input);
+
+        if (!isValidSnowflake(input)) return null;
+        else return guild.getEmoteById(input);
+    }
+
+    @Nullable
+    public static Member getMember(Guild guild, String input) {
+        input = replaceID(input);
+
+        if (!isValidSnowflake(input)) return null;
+        else return guild.getMemberById(input);
+    }
+
+    @Nullable
+    public static Category getCategory(Guild guild, String input) {
+        input = replaceID(input);
+
+        if (!isValidSnowflake(input)) return null;
+        else return guild.getCategoryById(input);
+    }
+
+    @Nullable
+    public static GuildChannel getGuildChannel(Guild guild, String input) {
+        input = replaceID(input);
+
+        if (!isValidSnowflake(input)) return null;
+        else return guild.getGuildChannelById(input);
+    }
+
+    @Nullable
+    public static StoreChannel getBan(Guild guild, String input) {
+        input = replaceID(input);
+
+        if (!isValidSnowflake(input)) return null;
+        else return guild.getStoreChannelById(input);
     }
 
     public static String replaceID(String input) {
