@@ -35,11 +35,3 @@ jobs:
         with:
           name: "JDABotHelper"
           path: build/libs/
-
-      - name: Publish to Brintray
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
-          BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
-        id: publish
-        run: ./gradlew bintrayUpload

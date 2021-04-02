@@ -3,7 +3,6 @@ plugins {
     id 'idea'
 
     id 'maven-publish'
-    id 'com.jfrog.bintray' version '1.8.5'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
@@ -34,30 +33,9 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    publications = ['Bintray']
-
-    pkg {
-        repo = 'JDABotHelper'
-        name = project.rootProject.name
-        publish = true
-
-        vcsUrl = 'https://github.com/booky10/JDABotHelper.git'
-        licenses = ['MIT']
-
-        version {
-            name = project.version as String
-            released = new Date().toString()
-            vcsTag = 'v' + (project.version as String)
-        }
-    }
-}
-
 publishing {
     publications {
-        Bintray(MavenPublication) {
+        Basic(MavenPublication) {
             artifactId = 'jdabothelper'
 
             artifact jar { classifier '' }
