@@ -5,6 +5,8 @@ import tk.booky.jdahelper.api.commands.IHelpTranslation;
 
 public class FallbackHelpTranslation implements IHelpTranslation {
 
+    public static FallbackHelpTranslation FALLBACK = new FallbackHelpTranslation();
+
     @Override
     public String getHelpCommand() {
         return "help";
