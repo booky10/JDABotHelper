@@ -48,7 +48,23 @@ public class CommandManager implements ICommandManager {
                     }
                 }
             } catch (Throwable throwable) {
-                new CommandException(throwable).printStackTrace();
+                CommandException commandException = new CommandException(throwable);
+                commandException.printStackTrace(System.out);
+
+                try (StringWriter writer = new StringWriter(); PrintWriter printer = new PrintWriter(writer)) {
+                    commandException.printStackTrace(printer);
+                    String stacktrace = writer.toString().replace("\t", "  ");
+                    if (stacktrace.length() > 2048) stacktrace = stacktrace.substring(0, 2048);
+
+                    EmbedBuilder builder = new EmbedBuilder();
+                    builder.setColor(Color.RED);
+                    builder.setTimestamp(new Date().toInstant());
+                    builder.setDescription(stacktrace);
+
+                    message.getChannel().sendMessage(builder.build()).complete();
+                } catch (IOException exception) {
+                    throw new Error(exception);
+                }
             }
         }, "Command Executor [" + command + "] (" + message.getAuthor().getAsTag() + ")").start();
     }
