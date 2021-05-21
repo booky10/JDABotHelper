@@ -14,13 +14,13 @@ group 'tk.booky'
 version VERSION_NAME
 
 repositories {
-    gradlePluginPortal()
     mavenCentral()
-    mavenLocal()
+
+    maven { url = 'https://m2.dv8tion.net/releases' }
 }
 
 dependencies {
-    implementation 'net.dv8tion:JDA:4.2.0_229'
+    implementation 'net.dv8tion:JDA:4.2.1_265'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
 
     implementation 'org.apache.commons:commons-lang3:3.9'
