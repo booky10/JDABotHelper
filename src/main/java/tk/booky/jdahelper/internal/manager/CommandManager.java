@@ -1,6 +1,7 @@
 package tk.booky.jdahelper.internal.manager;
 // Created by booky10 in JDABotHelper (18:09 27.09.20)
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import org.jetbrains.annotations.Nullable;
 import tk.booky.jdahelper.api.IConfiguration;
@@ -8,15 +9,16 @@ import tk.booky.jdahelper.api.commands.Command;
 import tk.booky.jdahelper.api.commands.IHelpTranslation;
 import tk.booky.jdahelper.api.exceptions.api.CommandException;
 import tk.booky.jdahelper.api.manager.ICommandManager;
+import tk.booky.jdahelper.api.provider.ILanguageProvider;
 import tk.booky.jdahelper.api.utils.JDAHelper;
 import tk.booky.jdahelper.internal.fallback.FallbackHelpTranslation;
 
 import java.awt.*;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.List;
+import java.util.*;
 
 public class CommandManager implements ICommandManager {
 
@@ -33,18 +35,26 @@ public class CommandManager implements ICommandManager {
 
         new Thread(() -> {
             try {
-                if (message.getChannelType().equals(ChannelType.TEXT)) {
-                    TextChannel channel = (TextChannel) message.getChannel();
+                if (!message.getChannelType().equals(ChannelType.TEXT)) return;
 
-                    if (trimmedCommand.equals(trimCommand(JDAHelper.getLanguageManager().getLanguageProvider(channel.getGuild()).getHelpTranslation().getHelpCommand()))) {
-                        sendHelpMessage(channel, null);
-                    } else {
-                        Command commandObject = resolveCommand(trimmedCommand);
-                        if (commandObject != null) {
-                            if (Objects.requireNonNull(message.getGuild().getMemberById(message.getAuthor().getId())).hasPermission(commandObject.getPermissions())) {
-                                commandObject.execute(channel, message, channel.getGuild().getMember(message.getAuthor()), command, args);
-                            }
-                        }
+                TextChannel channel = (TextChannel) message.getChannel();
+                ILanguageProvider provider = JDAHelper.getLanguageManager().getLanguageProvider(channel.getGuild());
+
+                boolean help = trimmedCommand.equals(trimCommand(provider.getHelpTranslation().getHelpCommand()));
+
+                if (help && args.length < 1) {
+                    sendHelpMessage(channel, (String) null);
+                } else {
+                    Command commandObject = resolveCommand(trimmedCommand);
+                    if (commandObject != null && help) {
+                        sendHelpMessage(channel, commandObject);
+                    } else if (commandObject != null) {
+                        Member member = message.getGuild().getMember(message.getAuthor());
+                        if (member == null) return;
+
+                        commandObject.executeCommand(channel, message, member, command, args);
+                    } else if (help) {
+                        sendHelpMessage(channel, (String) null);
                     }
                 }
             } catch (Throwable throwable) {
