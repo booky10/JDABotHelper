@@ -81,14 +81,14 @@ public class CommandManager implements ICommandManager {
 
     @Override
     public void registerCommand(Command command) {
-        String trimmedCommand = trimCommand(command.getCommand());
+        String trimmedCommand = trimCommand(command.getLabel());
         commands.put(trimmedCommand, command);
-        command.getAlias().forEach(alias -> CommandManager.alias.put(trimCommand(alias), trimmedCommand));
+        command.getAliases().forEach(alias -> CommandManager.alias.put(trimCommand(alias), trimmedCommand));
     }
 
     @Override
     public void unregisterCommand(Command command) {
-        String trimmedCommand = trimCommand(command.getCommand());
+        String trimmedCommand = trimCommand(command.getLabel());
         commands.remove(trimmedCommand);
         alias.forEach((alias, originalCommand) -> {
             if (!originalCommand.equals(trimmedCommand)) return;
@@ -97,21 +97,42 @@ public class CommandManager implements ICommandManager {
     }
 
     @Override
-    public Message sendHelpMessage(MessageChannel channel, @Nullable String command) {
-        GuildChannel guildChannel = channel.getType().isGuild() ? (GuildChannel) channel : null;
-        IHelpTranslation helpTranslation = channel.getType().isGuild() ? JDAHelper.getLanguageManager().getLanguageProvider(((GuildChannel) channel).getGuild()).getHelpTranslation() : new FallbackHelpTranslation() {
-        };
+    public Message sendHelpMessage(MessageChannel channel, @Nullable Command command, @Nullable Member member) {
+        boolean isGuild = channel.getType().isGuild();
+        GuildChannel guildChannel = isGuild ? (GuildChannel) channel : null;
 
-        String body;
-        if (command == null) {
-            body = getRegisteredCommands().entrySet().stream().map(entry -> String.format(helpTranslation.getEntryFormat(), getPrefix(guildChannel == null ? null : guildChannel.getGuild()), entry.getKey(), entry.getValue().getUsage())).collect(Collectors.joining("\n"));
+        ILanguageProvider provider = isGuild ? JDAHelper.getLanguageManager().getLanguageProvider(guildChannel.getGuild()) : null;
+        IHelpTranslation translation = isGuild ? provider.getHelpTranslation() : FallbackHelpTranslation.FALLBACK;
+
+        List<String> commands = new ArrayList<>();
+        String prefix = getPrefix(isGuild ? guildChannel.getGuild() : null);
+
+        if (command == null || !command.hasPermission(member)) {
+            getRegisteredCommands()
+                    .values()
+                    .stream()
+                    .filter(object -> object.hasPermission(member))
+                    .forEach(object -> commands.add(String.format(prefix, object.getLabel(), object.hasUsage() ? object.getUsage() : "")));
         } else {
-            command = trimCommand(command);
-            Command resolved = resolveCommand(command);
-            body = String.format(helpTranslation.getEntryFormat(), getPrefix(guildChannel == null ? null : guildChannel.getGuild()), command, resolved.getUsage());
+            commands.add(String.format(prefix, command.getLabel(), command.hasUsage() ? command.getUsage() : ""));
         }
 
-        return JDAHelper.sendEmbed(channel, Color.YELLOW, helpTranslation.getMessageTitle(), body);
+        return JDAHelper.sendEmbed(channel, Color.YELLOW, translation.getMessageTitle(), String.join("\n", commands));
+    }
+
+    @Override
+    public Message sendHelpMessage(MessageChannel channel, @Nullable Command command) {
+        return sendHelpMessage(channel, command, null);
+    }
+
+    @Override
+    public Message sendHelpMessage(MessageChannel channel, @Nullable String command, @Nullable Member member) {
+        return sendHelpMessage(channel, command == null ? null : resolveCommand(command), member);
+    }
+
+    @Override
+    public Message sendHelpMessage(MessageChannel channel, @Nullable String command) {
+        return sendHelpMessage(channel, command, null);
     }
 
     @Override
