@@ -188,7 +188,7 @@ public final class Listener extends ListenerAdapter {
         String prefix = JDAHelper.getCommandManager().getPrefix(event.getGuild());
         String messageContent = event.getMessage().getContentRaw();
 
-        if (messageContent.startsWith(prefix)) {
+        if (messageContent.startsWith(prefix) && !event.getAuthor().isBot()) {
             String[] args = messageContent.split(" ");
             String command = StringUtils.replaceOnce(args[0], prefix, "");
             args = Arrays.copyOfRange(args, 1, args.length);
